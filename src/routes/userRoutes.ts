@@ -11,19 +11,26 @@ userRoutes.post('/create', async (req: Request, res: Response) => {
     username,
     email,
     password,
-    palettes,
     profilePicture,
   }: UserInterface = req.body;
+
+  console.log({
+    username,
+    email,
+    password,
+    profilePicture,
+  });
 
   try {
     const user = await User.create({
       username,
       email,
       password,
-      palettes,
+      palettes: [],
       profilePicture,
     });
 
+    console.log(user);
     return res.json({ user });
   } catch (error) {
     return res.status(400).json({ error });

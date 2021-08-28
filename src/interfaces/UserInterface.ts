@@ -5,7 +5,7 @@ interface UserInterface {
   email: string;
   password: string;
   palettes: PaletteInterface[];
-  profilePicture: string;
+  profilePicture?: string;
 }
 
 export default UserInterface;

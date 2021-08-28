@@ -21,10 +21,7 @@ const UserSchema = new connection.Schema<UserInterface>({
     select: false,
   },
   palettes: [PaletteSchema],
-  profilePicture: {
-    type: String,
-    require: true,
-  },
+  profilePicture: String,
 });
 
 export default UserSchema;

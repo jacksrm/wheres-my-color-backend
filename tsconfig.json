@@ -62,7 +62,6 @@
     "skipLibCheck": true, /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
     "emitDeclarationOnly": true,
-    // Ensure that Babel can safely transpile files in the TypeScript project
     "baseUrl": "src",
     "paths": {
       "@models/*": ["./models/*"],
