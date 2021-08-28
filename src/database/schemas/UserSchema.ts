@@ -1,8 +1,8 @@
 import UserInterface from '@interfaces/UserInterface';
-import connection from '../connection';
+import { Schema } from 'mongoose';
 import PaletteSchema from './PaletteSchema';
 
-const UserSchema = new connection.Schema<UserInterface>({
+const UserSchema = new Schema<UserInterface>({
   username: {
     type: String,
     trim: true,

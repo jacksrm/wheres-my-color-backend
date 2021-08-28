@@ -7,6 +7,8 @@ import User from '@models/User';
 const userRoutes = express.Router();
 
 userRoutes.post('/create', async (req: Request, res: Response) => {
+  console.log('aqui...');
+
   const {
     username,
     email,
@@ -22,13 +24,15 @@ userRoutes.post('/create', async (req: Request, res: Response) => {
   });
 
   try {
-    const user = await User.create({
+    const user = new User({
       username,
       email,
       password,
       palettes: [],
       profilePicture,
     });
+
+    await user.save();
 
     console.log(user);
     return res.json({ user });

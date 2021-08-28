@@ -1,3 +1,6 @@
+const { compilerOptions } = require('./tsconfig.json');
+const { pathsToModuleNameMapper } = require('ts-jest/utils');
+
 module.exports = {
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
@@ -9,4 +12,7 @@ module.exports = {
   testEnvironment: 'node',
   // A preset that is used as a base for Jest's configuration
   preset: 'ts-jest',
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>/src',
+  }),
 };

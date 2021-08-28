@@ -1,7 +1,7 @@
-import connection from '@database/connection';
 import PaletteSchema from '@database/schemas/PaletteSchema';
 import PaletteInterface from '@interfaces/PaletteInterface';
+import { model } from 'mongoose';
 
-const Palette = connection.model<PaletteInterface>('Color', PaletteSchema);
+const Palette = model<PaletteInterface>('Color', PaletteSchema);
 
 export default Palette;
