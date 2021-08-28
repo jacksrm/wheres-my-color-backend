@@ -12,6 +12,18 @@
       }
     ]
   ],
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "@models": "./src/models",
+        "@controllers": "./src/controllers",
+        "@interfaces": "./src/interfaces",
+        "@routes": "./src/routes",
+        "@utils": "./src/utils",
+        "@database": "./src/database"
+      }
+    }]
+  ],
   "ignore": [
     "**/*.test.ts",
     "**/*.spec.ts"
