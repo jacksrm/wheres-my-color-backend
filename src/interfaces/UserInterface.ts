@@ -1,11 +1,10 @@
-import Palette from '@models/Palette';
+import PaletteInterface from './PaletteInterface';
 
 interface UserInterface {
-  readonly id: string;
   username: string;
   email: string;
   password: string;
-  palettes: Palette[];
+  palettes: PaletteInterface[];
   profilePicture: string;
 }
 

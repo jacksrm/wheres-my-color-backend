@@ -63,10 +63,14 @@
     "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
     "emitDeclarationOnly": true,
     // Ensure that Babel can safely transpile files in the TypeScript project
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "paths": {
-      "@interfaces/*": ["interfaces/*"],
-      "@models/*": ["models/*"]
+      "@models/*": ["./models/*"],
+      "@controllers/*": ["./controllers/*"],
+      "@interfaces/*": ["./interfaces/*"],
+      "@routes/*": ["./routes/*"],
+      "@utils/*": ["./utils/*"],
+      "@database/*": ["./database/*"]
     }
   },
   "include": [
@@ -74,6 +78,7 @@
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/*.test.ts"
   ]
 }

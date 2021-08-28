@@ -1,15 +1,13 @@
-import Color from '@models/Color';
-import User from '@models/User';
+import ColorInterface from './ColorInterface';
 
 interface PaletteInterface {
-  readonly id: string;
-  colors: Color[];
+  colors: ColorInterface[];
   name: string;
   empty: boolean;
   readonly full: boolean;
   isPublic: boolean;
-  members: User[];
-  canChange: User[];
+  membersID: string[];
+  canChange: string[];
 }
 
 export default PaletteInterface;

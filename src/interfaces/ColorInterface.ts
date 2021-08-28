@@ -1,5 +1,4 @@
 interface ColorInterface {
-  readonly id: string;
   value: string;
   title?: string;
 }

@@ -1,9 +1,13 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import cors from 'cors';
+
+import userRoutes from '@routes/userRoutes';
 
 const app = express();
+app.use(cors);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'Projeto Iniciado!'});
-});
+app.use('/user', userRoutes);
 
 export default app;
