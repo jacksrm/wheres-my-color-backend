@@ -1,8 +1,13 @@
-import UserInterface from '@interfaces/UserInterface';
 import { Schema } from 'mongoose';
-import PaletteSchema from './PaletteSchema';
 
-const UserSchema = new Schema<UserInterface>({
+import Palette from '@entities/Palette';
+import User from '@entities/User';
+
+const UserSchema = new Schema<User>({
+  id: {
+    type: String,
+    require: true,
+  },
   username: {
     type: String,
     trim: true,
@@ -20,7 +25,7 @@ const UserSchema = new Schema<UserInterface>({
     require: true,
     select: false,
   },
-  palettes: [PaletteSchema],
+  palettes: [typeof Palette],
   profilePicture: String,
 });
 

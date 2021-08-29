@@ -1,7 +1,7 @@
-import ColorInterface from '@interfaces/ColorInterface';
 import { Schema } from 'mongoose';
+import Color from '@entities/Color';
 
-const ColorSchema = new Schema<ColorInterface>({
+const ColorSchema = new Schema<Color>({
   value: { type: String, require: true },
   title: String,
 });
