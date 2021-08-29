@@ -1,6 +1,6 @@
 import { model } from 'mongoose';
-import MongoDBUsersRepository from 'repositories/implementations/MongoDBUsersRepository';
-import UserSchema from 'repositories/schemas/UserSchema';
+import MongoDBUsersRepository from '@repositories/implementations/MongoDBUsersRepository';
+import UserSchema from '@repositories/schemas/UserSchema';
 import CreateUserController from './CreateUserController';
 import CreateUserUseCase from './CreateUserUseCase';
 

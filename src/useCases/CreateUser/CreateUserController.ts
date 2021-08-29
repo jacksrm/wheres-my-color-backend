@@ -1,12 +1,17 @@
-import User from '@entities/User';
 import { Request, Response } from 'express';
+import User from '@entities/User';
 import CreateUserUseCase from './CreateUserUseCase';
+import { ICreateUserRequestDTO } from './CreateUserDTO';
 
 export default class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { username, email, password, profilePicture }: User = request.body;
+    const {
+      username,
+      email,
+      password,
+      profilePicture }: ICreateUserRequestDTO = request.body;
 
     try {
       await this.createUserUseCase.execute({

@@ -1,6 +1,6 @@
 import User from '@entities/User';
-import { Document, Model } from 'mongoose';
-import IUsersRepository from 'repositories/IUsersRepository';
+import { Model } from 'mongoose';
+import IUsersRepository from '@repositories/IUsersRepository';
 
 export default class MongoDBUsersRepository implements IUsersRepository {
   constructor(private UserModel: Model<User>) {}
