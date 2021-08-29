@@ -1,14 +1,17 @@
-import { Schema, Types } from 'mongoose';
-import Color from '@entities/Color';
+import { model, Schema, Types } from 'mongoose';
 import Palette from '@entities/Palette';
+import { ColorSchema } from './ColorSchema';
 
 const PaletteSchema = new Schema<Palette>({
-  owner: { type: Types.ObjectId, require: true },
-  colors: [typeof Color],
+  id: { type: String, require: true },
+  ownerId: { type: String, require: true },
+  colors: { type: [ColorSchema], default: [] },
   name: { type: String, require: true },
-  public: { type: Boolean, require: true },
-  membersID: [Types.ObjectId],
-  canChange: [Types.ObjectId],
+  isPublic: { type: Boolean, require: true },
+  membersId: [String],
+  authorizeChange: [String],
 });
 
-export default PaletteSchema;
+const PaletteModel = model('Palette', PaletteSchema, 'Palettes');
+
+export { PaletteSchema, PaletteModel };

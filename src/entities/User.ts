@@ -10,7 +10,7 @@ export default class User {
 
   public password: string;
 
-  public palettes?: Palette[];
+  public palettes?: string[];
 
   public profilePicture?: string;
 
@@ -18,8 +18,8 @@ export default class User {
     this.username = props.username;
     this.email = props.email;
     this.password = props.password;
-    this.palettes = props.palettes || [];
-    this.profilePicture = props.profilePicture || '';
+    this.palettes = props.palettes;
+    this.profilePicture = props.profilePicture;
     this.id = !id ? uuid() : id;
   }
 }

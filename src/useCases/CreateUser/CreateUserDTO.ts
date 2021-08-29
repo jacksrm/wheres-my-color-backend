@@ -7,7 +7,7 @@ export interface ICreateUserRequestDTO {
 
   password: string;
 
-  palettes?: Palette[];
+  palettes?: string[];
 
   profilePicture?: string;
 }
