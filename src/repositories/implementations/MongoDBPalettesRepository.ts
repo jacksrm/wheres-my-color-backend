@@ -19,13 +19,11 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
   }
 
   async save(palette: Palette): Promise<void> {
-    console.log(palette);
     const newPalette = new this.PaletteModel(palette);
     await newPalette.save();
     const user = await this.userRepository.findById(palette.ownerId);
     if (user) {
       user.palettes?.push(palette.id);
-      console.log(user);
       await this.userRepository.update(user);
     }
   }

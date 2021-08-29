@@ -5,7 +5,7 @@ import app from './app';
 const { PORT, API_URL } = process.env;
 
 app.listen(3333, () => {
-  console.log(`App Running on: ${API_URL}:${PORT}/`);
+  console.info(`App Running on: ${API_URL}:${PORT}/`);
   connect(process.env.DATABASE_URL || '', {
     useNewUrlParser: true,
     useFindAndModify: false,
