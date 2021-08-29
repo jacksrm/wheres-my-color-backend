@@ -1,6 +1,5 @@
-import { Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-import Palette from '@entities/Palette';
 import User from '@entities/User';
 
 const UserSchema = new Schema<User>({
@@ -25,8 +24,10 @@ const UserSchema = new Schema<User>({
     require: true,
     select: false,
   },
-  palettes: [typeof Palette],
-  profilePicture: String,
+  palettes: { type: [String], default: [] },
+  profilePicture: { type: String, default: '' },
 });
 
-export default UserSchema;
+const UserModel = model('User', UserSchema, 'Users');
+
+export { UserSchema, UserModel };

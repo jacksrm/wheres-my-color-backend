@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import Color from '@entities/Color';
 
 const ColorSchema = new Schema<Color>({
@@ -6,4 +6,6 @@ const ColorSchema = new Schema<Color>({
   title: String,
 });
 
-export default ColorSchema;
+const ColorModel = model('Color', ColorSchema);
+
+export { ColorSchema, ColorModel };

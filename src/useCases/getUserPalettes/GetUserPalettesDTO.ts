@@ -1,3 +1,3 @@
-export interface IGetUserPalettesRequest {
+export interface IGetUserPalettesRequestDTO {
   userId: string;
 }

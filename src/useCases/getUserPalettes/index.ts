@@ -1,13 +1,13 @@
-import MongoDBPalettesRepositories from '@repositories/implementations/MongoDBPalettesRepositories';
-import PaletteSchema from '@repositories/schemas/PaletteSchema';
-import { model } from 'mongoose';
+import { UserModel } from '@repositories/schemas/UserSchema';
+import { PaletteModel } from '@repositories/schemas/PaletteSchema';
+import MongoDBUsersRepository from '@repositories/implementations/MongoDBUsersRepository';
+import MongoDBPalettesRepository from '@repositories/implementations/MongoDBPalettesRepository';
 import GetUserPalettesController from './GetUserPalettesController';
 import GetUserPalettesUseCase from './GetUserPalettesUseCase';
 
-const PaletteModel = model('Palette', PaletteSchema);
-
-const paletteRepository = new MongoDBPalettesRepositories(PaletteModel);
-const getUserPalettesUseCase = new GetUserPalettesUseCase(paletteRepository);
+const usersRepository = new MongoDBUsersRepository(UserModel);
+const palettesRepository = new MongoDBPalettesRepository(PaletteModel, usersRepository);
+const getUserPalettesUseCase = new GetUserPalettesUseCase(palettesRepository);
 const getUserPaletteController = new GetUserPalettesController(getUserPalettesUseCase);
 
 export { getUserPalettesUseCase, getUserPaletteController };
