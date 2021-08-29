@@ -11,7 +11,7 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
   ) {}
 
   async getUserPalettes(userId: string): Promise<Palette[] | []> {
-    const palette = await this.PaletteModel.find({ owner: userId });
+    const palette = await this.PaletteModel.find({ ownerId: userId }).exec();
 
     if (!palette) return [];
 
