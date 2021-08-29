@@ -4,6 +4,8 @@ import Color from './Color';
 export default class Palette {
   public readonly id: string;
 
+  public readonly ownerId: string;
+
   public colors: Color[];
 
   public name: string;
@@ -16,6 +18,7 @@ export default class Palette {
 
   constructor(props: Omit<Palette, 'id'>, id?: string) {
     this.colors = props.colors;
+    this.ownerId = props.ownerId;
     this.name = props.name;
     this.isPublic = props.isPublic;
     this.membersID = props.membersID;
