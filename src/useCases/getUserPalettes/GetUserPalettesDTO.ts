@@ -1,3 +1,3 @@
 export interface IGetUserPalettesRequestDTO {
-  userId: string;
+  ownerId: string;
 }

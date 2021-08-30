@@ -1,8 +1,15 @@
-import { v4 as uuid } from 'uuid';
-import Palette from './Palette';
+import { v4 } from 'uuid';
+
+interface UserProps {
+  username: string;
+  email: string;
+  password: string;
+  palettes?: string[];
+  profilePicture?: string;
+}
 
 export default class User {
-  public readonly id: string;
+  public readonly _id: string;
 
   public username: string;
 
@@ -14,12 +21,12 @@ export default class User {
 
   public profilePicture?: string;
 
-  constructor(props: Omit<User, 'id'>, id?: string) {
+  constructor(props: UserProps, id: string = v4()) {
     this.username = props.username;
     this.email = props.email;
     this.password = props.password;
     this.palettes = props.palettes;
     this.profilePicture = props.profilePicture;
-    this.id = !id ? uuid() : id;
+    this._id = id;
   }
 }
