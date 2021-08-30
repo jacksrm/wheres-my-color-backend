@@ -19,17 +19,13 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
     }
   }
 
-  async getSinglePalette(paletteId: String): Promise<Palette> {
+  async getSinglePalette(paletteId: String): Promise<Palette | null> {
     const palette = await this.PaletteModel.findById(paletteId).exec();
-
-    if (!palette) throw new Error("This palette doesn't exists!");
-
     return palette;
   }
 
   async getUserPalettes(ownerId: string): Promise<Palette[] | []> {
     const palette = await this.PaletteModel.find({ ownerId }).exec();
-
     return palette;
   }
 }

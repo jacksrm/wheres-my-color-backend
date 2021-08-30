@@ -14,7 +14,7 @@ export default class GetUserPalettesController {
 
       try {
         const palettes = await this.getUserPalettesUseCase.execute({ ownerId });
-        return response.status(201).json({ palettes });
+        return response.status(200).json({ palettes });
       } catch (error) {
         return response.status(400).json({ message: 'An error has ocurred!' });
       }
