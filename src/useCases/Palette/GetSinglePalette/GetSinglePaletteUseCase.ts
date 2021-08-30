@@ -9,6 +9,9 @@ export default class GetSinglePaletteUseCase {
     const palette = await this.paletteRepository.getSinglePalette(
       data.paletteId,
     );
+
+    if (!palette) throw new Error("This palette doesn't exists!");
+
     return palette;
   }
 }

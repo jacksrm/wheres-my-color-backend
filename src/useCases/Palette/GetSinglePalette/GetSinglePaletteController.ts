@@ -14,11 +14,11 @@ export default class GetSinglePaletteController {
         const palette = await this.getSinglePaletteUseCase.execute(
           request.params,
         );
-        return response.status(201).json({ palette });
+        return response.status(200).json({ palette });
       } catch (error) {
         return response
           .status(400)
-          .json({ error });
+          .json({ message: error.Message });
       }
     };
   }

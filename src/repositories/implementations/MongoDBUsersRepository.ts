@@ -7,17 +7,11 @@ export default class MongoDBUsersRepository implements IUsersRepository {
 
   async findByEmail(email: string): Promise<User | null> {
     const user = await this.UserModel.findOne({ email }).exec();
-
-    if (!user) return null;
-
     return user;
   }
 
   async findById(_id: string): Promise<User | null> {
-    const user = await this.UserModel.findOne({ _id }).exec();
-
-    if (!user) return null;
-
+    const user = await this.UserModel.findById(_id).exec();
     return user;
   }
 
