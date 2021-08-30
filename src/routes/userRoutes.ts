@@ -5,15 +5,8 @@ import { IGetUserPalettesRequestDTO } from '@useCases/User/GetUserPalettes/GetUs
 
 const userRoutes = express.Router();
 
-userRoutes.post('/create', (req: Request, res: Response) => (
-  createUserController.handle(req, res)
-));
+userRoutes.post('/create', createUserController.handle());
 
-userRoutes.get(
-  '/:ownerId',
-  (req: Request<IGetUserPalettesRequestDTO>, res: Response) => (
-    getUserPalettesController.handle(req, res)
-  ),
-);
+userRoutes.get('/:ownerId', getUserPalettesController.handle());
 
 export default userRoutes;
