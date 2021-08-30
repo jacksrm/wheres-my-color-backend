@@ -7,7 +7,6 @@
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "isolatedModules": true,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -29,7 +28,7 @@
       ],
       "@repositories/*": [
         "./repositories/*"
-      ],
+      ]
     }
   },
   "include": [

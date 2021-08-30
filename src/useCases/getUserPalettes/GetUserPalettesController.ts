@@ -11,10 +11,10 @@ export default class GetUserPalettesController {
     request: Request<IGetUserPalettesRequestDTO>,
     response: Response,
   ): Promise<Response> {
-    const { userId } = request.params;
+    const { ownerId } = request.params;
 
     try {
-      const palettes = await this.getUserPalettesUseCase.execute({ userId });
+      const palettes = await this.getUserPalettesUseCase.execute({ ownerId });
       return response.status(201).json({ palettes });
     } catch (error) {
       return response.status(400).json({ message: 'An error has ocurred!' });

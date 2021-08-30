@@ -1,5 +1,3 @@
-import Palette from '@entities/Palette';
-
 export interface ICreateUserRequestDTO {
   username: string;
 

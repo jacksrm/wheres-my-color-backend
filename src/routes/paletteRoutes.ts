@@ -6,7 +6,7 @@ import { createPaletteController } from '@useCases/CreatePalette';
 const paletteRoutes = Router();
 
 paletteRoutes.get(
-  '/:userId',
+  '/:ownerId',
   (req: Request<IGetUserPalettesRequestDTO>, res: Response) => (
     getUserPaletteController.handle(req, res)
   ),

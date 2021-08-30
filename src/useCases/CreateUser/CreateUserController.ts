@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import User from '@entities/User';
 import CreateUserUseCase from './CreateUserUseCase';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 

@@ -2,7 +2,14 @@ import { model, Schema } from 'mongoose';
 import Color from '@entities/Color';
 
 const ColorSchema = new Schema<Color>({
-  value: { type: String, require: true },
+  _id: {
+    type: String,
+    require: true,
+  },
+  value: {
+    type: String,
+    require: true,
+  },
   title: String,
 });
 

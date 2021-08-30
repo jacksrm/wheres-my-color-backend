@@ -1,5 +1,4 @@
-import { ICreatePaletteRequestDTO } from '@useCases/CreatePalette/CreatePaleteteDTO';
-import { v4 as uuid } from 'uuid';
+import { v4 } from 'uuid';
 import Color from './Color';
 
 interface PaletteProps {
@@ -12,7 +11,7 @@ interface PaletteProps {
 }
 
 export default class Palette {
-  public readonly id: string;
+  public readonly _id: string;
 
   public readonly ownerId: string;
 
@@ -26,13 +25,13 @@ export default class Palette {
 
   public authorizeChange: string[];
 
-  constructor(props: PaletteProps, id?: string) {
+  constructor(props: PaletteProps, id: string = v4()) {
     this.colors = props.colors;
     this.ownerId = props.ownerId;
     this.name = props.name;
     this.isPublic = props.isPublic;
     this.membersId = props.membersId ? props.membersId : [props.ownerId];
     this.authorizeChange = props.authorizeChange ? props.authorizeChange : [props.ownerId];
-    this.id = !id ? uuid() : id;
+    this._id = id;
   }
 }

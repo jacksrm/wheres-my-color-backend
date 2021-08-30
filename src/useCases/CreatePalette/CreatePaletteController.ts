@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ICreatePaletteRequestDTO } from './CreatePaleteteDTO';
+import { ICreatePaletteRequestDTO } from './CreatePaletteDTO';
 import CreatePaletteUseCase from './CreatePaletteUseCase';
 
 export default class CreatePaletteController {

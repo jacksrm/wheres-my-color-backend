@@ -1,7 +1,6 @@
-import Palette from '@entities/Palette';
-import User from '@entities/User';
-import IPaletteRepository from '@repositories/IPaletteRepository';
 import { Model } from 'mongoose';
+import Palette from '@entities/Palette';
+import IPaletteRepository from '@repositories/IPaletteRepository';
 import MongoDBUsersRepository from './MongoDBUsersRepository';
 
 export default class MongoDBPalettesRepository implements IPaletteRepository {
@@ -10,8 +9,8 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
     private userRepository: MongoDBUsersRepository,
   ) {}
 
-  async getUserPalettes(userId: string): Promise<Palette[] | []> {
-    const palette = await this.PaletteModel.find({ ownerId: userId }).exec();
+  async getUserPalettes(ownerId: string): Promise<Palette[] | []> {
+    const palette = await this.PaletteModel.find({ ownerId }).exec();
 
     if (!palette) return [];
 
@@ -23,7 +22,7 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
     await newPalette.save();
     const user = await this.userRepository.findById(palette.ownerId);
     if (user) {
-      user.palettes?.push(palette.id);
+      user.palettes?.push(palette._id);
       await this.userRepository.update(user);
     }
   }
