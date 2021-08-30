@@ -9,14 +9,6 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
     private userRepository: MongoDBUsersRepository,
   ) {}
 
-  async getUserPalettes(ownerId: string): Promise<Palette[] | []> {
-    const palette = await this.PaletteModel.find({ ownerId }).exec();
-
-    if (!palette) return [];
-
-    return palette;
-  }
-
   async save(palette: Palette): Promise<void> {
     const newPalette = new this.PaletteModel(palette);
     await newPalette.save();
@@ -25,5 +17,19 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
       user.palettes?.push(palette._id);
       await this.userRepository.update(user);
     }
+  }
+
+  async getSinglePalette(paletteId: String): Promise<Palette> {
+    const palette = await this.PaletteModel.findById(paletteId).exec();
+
+    if (!palette) throw new Error("This palette doesn't exists!");
+
+    return palette;
+  }
+
+  async getUserPalettes(ownerId: string): Promise<Palette[] | []> {
+    const palette = await this.PaletteModel.find({ ownerId }).exec();
+
+    return palette;
   }
 }

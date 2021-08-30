@@ -8,6 +8,6 @@ import GetUserPalettesUseCase from './GetUserPalettesUseCase';
 const usersRepository = new MongoDBUsersRepository(UserModel);
 const palettesRepository = new MongoDBPalettesRepository(PaletteModel, usersRepository);
 const getUserPalettesUseCase = new GetUserPalettesUseCase(palettesRepository);
-const getUserPaletteController = new GetUserPalettesController(getUserPalettesUseCase);
+const getUserPalettesController = new GetUserPalettesController(getUserPalettesUseCase);
 
-export { getUserPalettesUseCase, getUserPaletteController };
+export { getUserPalettesUseCase, getUserPalettesController };
