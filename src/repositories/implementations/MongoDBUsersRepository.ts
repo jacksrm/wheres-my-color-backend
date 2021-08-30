@@ -13,8 +13,8 @@ export default class MongoDBUsersRepository implements IUsersRepository {
     return user;
   }
 
-  async findById(id: string): Promise<User | null> {
-    const user = await this.UserModel.findOne({ id }).exec();
+  async findById(_id: string): Promise<User | null> {
+    const user = await this.UserModel.findOne({ _id }).exec();
 
     if (!user) return null;
 
@@ -22,7 +22,7 @@ export default class MongoDBUsersRepository implements IUsersRepository {
   }
 
   async update(user: User): Promise<void> {
-    await this.UserModel.findOneAndUpdate({ id: user.id }, { ...user });
+    await this.UserModel.findOneAndUpdate({ _id: user._id }, { ...user });
   }
 
   async save(user: User): Promise<void> {

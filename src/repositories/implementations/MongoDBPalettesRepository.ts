@@ -1,7 +1,6 @@
-import Palette from '@entities/Palette';
-import User from '@entities/User';
-import IPaletteRepository from '@repositories/IPaletteRepository';
 import { Model } from 'mongoose';
+import Palette from '@entities/Palette';
+import IPaletteRepository from '@repositories/IPaletteRepository';
 import MongoDBUsersRepository from './MongoDBUsersRepository';
 
 export default class MongoDBPalettesRepository implements IPaletteRepository {
@@ -10,21 +9,27 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
     private userRepository: MongoDBUsersRepository,
   ) {}
 
-  async getUserPalettes(userId: string): Promise<Palette[] | []> {
-    const palette = await this.PaletteModel.find({ ownerId: userId }).exec();
-
-    if (!palette) return [];
-
-    return palette;
-  }
-
   async save(palette: Palette): Promise<void> {
     const newPalette = new this.PaletteModel(palette);
     await newPalette.save();
     const user = await this.userRepository.findById(palette.ownerId);
     if (user) {
-      user.palettes?.push(palette.id);
+      user.palettes?.push(palette._id);
       await this.userRepository.update(user);
     }
+  }
+
+  async getSinglePalette(paletteId: String): Promise<Palette> {
+    const palette = await this.PaletteModel.findById(paletteId).exec();
+
+    if (!palette) throw new Error("This palette doesn't exists!");
+
+    return palette;
+  }
+
+  async getUserPalettes(ownerId: string): Promise<Palette[] | []> {
+    const palette = await this.PaletteModel.find({ ownerId }).exec();
+
+    return palette;
   }
 }

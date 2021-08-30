@@ -3,7 +3,7 @@ import { model, Schema } from 'mongoose';
 import User from '@entities/User';
 
 const UserSchema = new Schema<User>({
-  id: {
+  _id: {
     type: String,
     require: true,
   },
@@ -24,8 +24,14 @@ const UserSchema = new Schema<User>({
     require: true,
     select: false,
   },
-  palettes: { type: [String], default: [] },
-  profilePicture: { type: String, default: '' },
+  palettes: {
+    type: [String],
+    default: [],
+  },
+  profilePicture: {
+    type: String,
+    default: '',
+  },
 });
 
 const UserModel = model('User', UserSchema, 'Users');

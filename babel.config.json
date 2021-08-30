@@ -15,12 +15,11 @@
   "plugins": [
     ["module-resolver", {
       "alias": {
-        "@models": "./src/models",
-        "@controllers": "./src/controllers",
-        "@interfaces": "./src/interfaces",
         "@routes": "./src/routes",
         "@utils": "./src/utils",
-        "@database": "./src/database"
+        "@entities": "./src/entities",
+        "@useCases": "./src/useCases",
+        "@repositories": "./src/repositories"
       }
     }]
   ],
