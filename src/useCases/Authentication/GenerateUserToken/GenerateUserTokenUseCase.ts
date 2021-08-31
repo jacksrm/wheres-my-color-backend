@@ -7,7 +7,7 @@ export default class GenerateUserTokenUseCase {
 
     const token = sign(
       {
-        id: user._id,
+        userId: user._id,
         email: user.email,
       },
       SECRET_KEY!,

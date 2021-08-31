@@ -1,4 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
+import { IGetUserPaletteRequestWithUserID } from '@useCases/User/GetUserPalettes/GetUserPalettesDTO';
+import { NextFunction, Response } from 'express';
 import {
   IAuthenticateUserJWT,
   IAuthenticateUserRequestDTO,
@@ -10,7 +11,7 @@ export default class AuthenticateUserMiddleware {
 
   handle() {
     return (
-      request: Request & IAuthenticateUserJWT,
+      request: IGetUserPaletteRequestWithUserID,
       response: Response,
       next: NextFunction,
     ) => {

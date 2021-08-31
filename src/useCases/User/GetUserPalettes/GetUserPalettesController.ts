@@ -1,5 +1,8 @@
-import { Request, Response } from 'express';
-import { IGetUserPalettesRequestDTO } from './GetUserPalettesDTO';
+import { Response } from 'express';
+import {
+  IGetUserPaletteRequestWithUserID,
+  IGetUserPalettesRequestDTO,
+} from './GetUserPalettesDTO';
 import GetUserPalettesUseCase from './GetUserPalettesUseCase';
 
 export default class GetUserPalettesController {
@@ -7,10 +10,13 @@ export default class GetUserPalettesController {
 
   handle() {
     return async (
-      request: Request<IGetUserPalettesRequestDTO>,
+      request: IGetUserPaletteRequestWithUserID,
       response: Response,
     ) => {
-      const { ownerId } = request.params;
+      const { userId } = request;
+      const { ownerId } = request.params as unknown as IGetUserPalettesRequestDTO;
+
+      if (userId !== ownerId) return response.sendStatus(401);
 
       try {
         const palettes = await this.getUserPalettesUseCase.execute({ ownerId });
