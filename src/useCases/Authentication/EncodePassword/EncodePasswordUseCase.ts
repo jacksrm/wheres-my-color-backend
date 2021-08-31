@@ -2,13 +2,12 @@ import { genSalt, hash } from 'bcrypt';
 import User from '@entities/User';
 
 export default class EncodePasswordUseCase {
-  constructor(private user: User) {}
-
-  async execute(): Promise<User> {
+  async execute(user: User): Promise<User> {
+    const encodeUser = user;
     const salt = await genSalt(12);
-    const hashPass = await hash(this.user.password, salt);
+    const hashPass = await hash(encodeUser.password, salt);
 
-    this.user.password = hashPass;
-    return this.user;
+    encodeUser.password = hashPass;
+    return user;
   }
 }

@@ -9,21 +9,21 @@ const userData = {
 };
 
 const user = new User(userData);
-const encodePasswordUseCase = new EncodePasswordUseCase(user);
+const encodePasswordUseCase = new EncodePasswordUseCase();
 
 describe.skip('Testes de CheckEncodedPassword', () => {
-  beforeEach(async () => {
-    await encodePasswordUseCase.execute();
+  beforeAll(async () => {
+    await encodePasswordUseCase.execute(user);
   });
 
   test('Deve retornar true quando a senha for correta', async () => {
-    const verification = checkUserEncodedPassword(userData.password, user);
+    const verification = await checkUserEncodedPassword(user, userData.password);
 
     expect(verification).toBeTruthy();
   });
 
   test('Deve retornar false quando a senha estiver incorreta.', async () => {
-    const verification = checkUserEncodedPassword('abraCadabra', user);
+    const verification = await checkUserEncodedPassword(user, 'abraCadabra');
 
     expect(verification).toBeFalsy();
   });
