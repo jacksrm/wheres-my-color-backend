@@ -1,7 +1,8 @@
 {
   "env": {
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": [
     "airbnb-base"
@@ -30,6 +31,7 @@
     }
   },
   "rules": {
+    "class-methods-use-this": "off",
     "no-console": "off",
     "no-useless-constructor": "off",
     "no-unused-vars": "off",

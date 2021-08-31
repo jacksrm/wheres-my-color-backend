@@ -3,8 +3,10 @@ import { UserModel } from '@repositories/schemas/UserSchema';
 import GetSingleUserController from './GetSingleUserController';
 import GetSingleUserUseCase from './GetSingleUserUseCase';
 
-const usersRepository = new MongoDBUsersRepository(UserModel);
-const getSingleUserUseCase = new GetSingleUserUseCase(usersRepository);
-const getSingleUserController = new GetSingleUserController(getSingleUserUseCase);
+export default function getSingleUser() {
+  const usersRepository = new MongoDBUsersRepository(UserModel);
+  const useCase = new GetSingleUserUseCase(usersRepository);
+  const controller = new GetSingleUserController(useCase);
 
-export { getSingleUserUseCase, getSingleUserController };
+  return { useCase, controller };
+}

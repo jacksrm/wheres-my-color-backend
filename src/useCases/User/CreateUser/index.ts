@@ -3,8 +3,10 @@ import { UserModel } from '@repositories/schemas/UserSchema';
 import CreateUserController from './CreateUserController';
 import CreateUserUseCase from './CreateUserUseCase';
 
-const mongoDBUsersRepository = new MongoDBUsersRepository(UserModel);
-const createUserUseCase = new CreateUserUseCase(mongoDBUsersRepository);
-const createUserController = new CreateUserController(createUserUseCase);
+export default function createUser() {
+  const mongoDBUsersRepository = new MongoDBUsersRepository(UserModel);
+  const useCase = new CreateUserUseCase(mongoDBUsersRepository);
+  const controller = new CreateUserController(useCase);
 
-export { createUserUseCase, createUserController };
+  return { useCase, controller };
+}

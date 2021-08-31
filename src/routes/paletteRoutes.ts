@@ -1,11 +1,11 @@
-import { Request, Response, Router } from 'express';
-import { createPaletteController } from '@useCases/Palette/CreatePalette';
-import { getSinglePaletteController } from '@useCases/Palette/GetSinglePalette';
+import { Router } from 'express';
+import createPalette from '@useCases/Palette/CreatePalette';
+import getSinglePalette from '@useCases/Palette/GetSinglePalette';
 
 const paletteRoutes = Router();
 
-paletteRoutes.get('/:paletteId', getSinglePaletteController.handle());
+paletteRoutes.get('/:paletteId', getSinglePalette().controller.handle());
 
-paletteRoutes.post('/create', createPaletteController.handle());
+paletteRoutes.post('/create', createPalette().controller.handle());
 
 export default paletteRoutes;

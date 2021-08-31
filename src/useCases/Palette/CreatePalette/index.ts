@@ -5,12 +5,14 @@ import { PaletteModel } from '@repositories/schemas/PaletteSchema';
 import CreatePaletteUseCase from './CreatePaletteUseCase';
 import CreatePaletteController from './CreatePaletteController';
 
-const usersRepository = new MongoDBUsersRepository(UserModel);
-const palettesRepository = new MongoDBPalettesRepository(
-  PaletteModel,
-  usersRepository,
-);
-const createPaletteUseCase = new CreatePaletteUseCase(palettesRepository);
-const createPaletteController = new CreatePaletteController(createPaletteUseCase);
+export default function createPalette() {
+  const usersRepository = new MongoDBUsersRepository(UserModel);
+  const palettesRepository = new MongoDBPalettesRepository(
+    PaletteModel,
+    usersRepository,
+  );
+  const useCase = new CreatePaletteUseCase(palettesRepository);
+  const controller = new CreatePaletteController(useCase);
 
-export { createPaletteUseCase, createPaletteController };
+  return { useCase, controller };
+}

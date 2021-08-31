@@ -1,14 +1,19 @@
 import express from 'express';
-import { createUserController } from '@useCases/User/CreateUser';
-import { getUserPalettesController } from '@useCases/User/GetUserPalettes';
-import { getSingleUserController } from '@useCases/User/GetSingleUser';
+import createUser from '@useCases/User/CreateUser';
+import getUserPalettes from '@useCases/User/GetUserPalettes';
+import getSingleUser from '@useCases/User/GetSingleUser';
+import authenticateUser from '@useCases/Authentication/AuthenticateUser';
 
 const userRoutes = express.Router();
 
-userRoutes.post('/create', createUserController.handle());
+userRoutes.post('/create', createUser().controller.handle());
 
-userRoutes.get('/:ownerId', getUserPalettesController.handle());
+userRoutes.get(
+  '/:ownerId',
+  authenticateUser().middleware.handle(),
+  getUserPalettes().controller.handle(),
+);
 
-userRoutes.get('/profile/:userId', getSingleUserController.handle());
+userRoutes.get('/profile/:userId', getSingleUser().controller.handle());
 
 export default userRoutes;

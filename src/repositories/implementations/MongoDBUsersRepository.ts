@@ -5,13 +5,20 @@ import IUsersRepository from '@repositories/IUsersRepository';
 export default class MongoDBUsersRepository implements IUsersRepository {
   constructor(private UserModel: Model<User>) {}
 
-  async findByEmail(email: string): Promise<User | null> {
-    const user = await this.UserModel.findOne({ email }).exec();
+  async findByEmail(
+    email: string,
+    withPassword?: boolean,
+  ): Promise<User | null> {
+    const user = withPassword
+      ? await this.UserModel.findOne({ email }).select('+password').exec()
+      : await this.UserModel.findOne({ email }).exec();
     return user;
   }
 
-  async findById(_id: string): Promise<User | null> {
-    const user = await this.UserModel.findById(_id).exec();
+  async findById(_id: string, withPassword?: boolean): Promise<User | null> {
+    const user = withPassword
+      ? await this.UserModel.findById(_id).select('+password').exec()
+      : await this.UserModel.findById(_id).exec();
     return user;
   }
 
@@ -19,8 +26,9 @@ export default class MongoDBUsersRepository implements IUsersRepository {
     await this.UserModel.findOneAndUpdate({ _id: user._id }, { ...user });
   }
 
-  async save(user: User): Promise<void> {
+  async save(user: User): Promise<User> {
     const userToSave = new this.UserModel(user);
-    await userToSave.save();
+    userToSave.isNew = true;
+    return userToSave.save();
   }
 }
