@@ -26,6 +26,7 @@ describe.skip('Testes de GenerateUserToken.', () => {
 
     const token = generateUserToken(user);
     const data = verify(token, SECRET_KEY!) as IData;
+    // const data = verify(token, 'SECRET_KEY!') as IData;
 
     expect(data.id).toEqual(id);
   });
