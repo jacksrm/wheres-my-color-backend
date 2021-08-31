@@ -31,6 +31,7 @@
     }
   },
   "rules": {
+    "class-methods-use-this": "off",
     "no-console": "off",
     "no-useless-constructor": "off",
     "no-unused-vars": "off",

@@ -19,8 +19,9 @@ export default class MongoDBUsersRepository implements IUsersRepository {
     await this.UserModel.findOneAndUpdate({ _id: user._id }, { ...user });
   }
 
-  async save(user: User): Promise<void> {
+  async save(user: User): Promise<User> {
     const userToSave = new this.UserModel(user);
-    await userToSave.save();
+    userToSave.isNew = true;
+    return userToSave.save();
   }
 }
