@@ -1,5 +1,5 @@
 import User from '@entities/User';
-import EncodePasswordUseCase from './EncodePasswordUseCase';
+import encodeUserPassword from '.';
 
 describe.skip('Testa EnodePasswordUseCase.', () => {
   test('Verifica se o password foi encriptado.', async () => {
@@ -9,8 +9,7 @@ describe.skip('Testa EnodePasswordUseCase.', () => {
       username: 'JackSR',
     };
     const user = new User(userData);
-    const encodePasswordUseCase = new EncodePasswordUseCase(user);
-    await encodePasswordUseCase.execute();
+    await encodeUserPassword(user);
 
     expect(user.password).toMatch(/^\$2b\$/);
     expect(user.password).not.toEqual(userData.password);

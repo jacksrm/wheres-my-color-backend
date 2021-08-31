@@ -1,6 +1,6 @@
 import User from '@entities/User';
+import checkUserEncodedPassword from '.';
 import EncodePasswordUseCase from '../EncodePassword/EncodePasswordUseCase';
-import CheckEncodedPasswordUseCase from './CheckEncodedPasswordUseCase';
 
 const userData = {
   email: 'jacl@meuapp.com',
@@ -17,17 +17,13 @@ describe.skip('Testes de CheckEncodedPassword', () => {
   });
 
   test('Deve retornar true quando a senha for correta', async () => {
-    const checkPass = new CheckEncodedPasswordUseCase(user);
-
-    const verification = await checkPass.execute({ password: userData.password });
+    const verification = checkUserEncodedPassword(userData.password, user);
 
     expect(verification).toBeTruthy();
   });
 
   test('Deve retornar false quando a senha estiver incorreta.', async () => {
-    const checkPass = new CheckEncodedPasswordUseCase(user);
-
-    const verification = await checkPass.execute({ password: 'abraCadabra' });
+    const verification = checkUserEncodedPassword('abraCadabra', user);
 
     expect(verification).toBeFalsy();
   });
