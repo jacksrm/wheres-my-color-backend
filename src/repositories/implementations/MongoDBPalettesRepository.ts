@@ -28,4 +28,9 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
     const palette = await this.PaletteModel.find({ ownerId }).exec();
     return palette;
   }
+
+  async getPublicUserPalettes(ownerId: string): Promise<Palette[] | []> {
+    const palette = await this.PaletteModel.find({ ownerId, isPublic: true }).exec();
+    return palette;
+  }
 }

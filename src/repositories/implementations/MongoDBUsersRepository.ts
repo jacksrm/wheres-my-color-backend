@@ -15,6 +15,16 @@ export default class MongoDBUsersRepository implements IUsersRepository {
     return user;
   }
 
+  async findByUsername(
+    username: string,
+    withPassword?: boolean,
+  ): Promise<User | null> {
+    const user = withPassword
+      ? await this.UserModel.findOne({ username }).select('+password').exec()
+      : await this.UserModel.findOne({ username }).exec();
+    return user;
+  }
+
   async findById(_id: string, withPassword?: boolean): Promise<User | null> {
     const user = withPassword
       ? await this.UserModel.findById(_id).select('+password').exec()
