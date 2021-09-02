@@ -4,9 +4,9 @@ import GetPaletteController from './GetPaletteController';
 import GetPaletteUseCase from './GetPaletteUseCase';
 
 export default function getPalette() {
-  const paletteRepository = new MongoDBPalettesRepository(PaletteModel);
+  const palettesRepository = new MongoDBPalettesRepository(PaletteModel);
 
-  const useCase = new GetPaletteUseCase(paletteRepository);
+  const useCase = new GetPaletteUseCase(palettesRepository);
   const controller = new GetPaletteController(useCase);
 
   return { controller, useCase };

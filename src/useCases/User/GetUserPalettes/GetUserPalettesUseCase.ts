@@ -1,5 +1,5 @@
 import Palette from '@entities/Palette';
-import IPaletteRepository from '@repositories/IPaletteRepository';
+import IPaletteRepository from '@repositories/IPalettesRepository';
 import { IGetUserPalettesRequestDTO } from './GetUserPalettesDTO';
 
 export default class GetUserPalettesUseCase {
