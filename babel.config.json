@@ -19,7 +19,8 @@
         "@utils": "./src/utils",
         "@entities": "./src/entities",
         "@useCases": "./src/useCases",
-        "@repositories": "./src/repositories"
+        "@repositories": "./src/repositories",
+        "@interfaces": "./src/interfaces"
       }
     }]
   ],
