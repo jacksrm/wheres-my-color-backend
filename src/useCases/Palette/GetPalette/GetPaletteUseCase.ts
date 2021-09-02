@@ -1,11 +1,11 @@
 import Palette from '@entities/Palette';
 import IPaletteRepository from '@repositories/IPaletteRepository';
-import { IGetSinglePaletteRequestDTO } from './GetSinglePaletteDTO';
+import { IGetPaletteRequestDTO } from './GetPaletteDTO';
 
 export default class GetSinglePaletteUseCase {
   constructor(private paletteRepository: IPaletteRepository) {}
 
-  async execute(data: IGetSinglePaletteRequestDTO): Promise<Palette> {
+  async execute(data: IGetPaletteRequestDTO): Promise<Palette> {
     const palette = await this.paletteRepository.getSinglePalette(
       data.paletteId,
     );
