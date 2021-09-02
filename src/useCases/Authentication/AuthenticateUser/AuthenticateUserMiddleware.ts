@@ -1,5 +1,5 @@
-import { IGetUserPaletteRequestWithUserID } from '@useCases/User/GetUserPalettes/GetUserPalettesDTO';
 import { NextFunction, Response } from 'express';
+import { IRequestWithUserID } from 'interfaces/IRequestWithUserID';
 import {
   IAuthenticateUserJWT,
   IAuthenticateUserRequestDTO,
@@ -11,7 +11,7 @@ export default class AuthenticateUserMiddleware {
 
   handle() {
     return (
-      request: IGetUserPaletteRequestWithUserID,
+      request: IRequestWithUserID,
       response: Response,
       next: NextFunction,
     ) => {

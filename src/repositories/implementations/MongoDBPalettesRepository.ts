@@ -1,9 +1,9 @@
 import { Model } from 'mongoose';
 import Palette from '@entities/Palette';
-import IPaletteRepository from '@repositories/IPaletteRepository';
+import IPalettesRepository from '@repositories/IPalettesRepository';
 import MongoDBUsersRepository from './MongoDBUsersRepository';
 
-export default class MongoDBPalettesRepository implements IPaletteRepository {
+export default class MongoDBPalettesRepository implements IPalettesRepository {
   constructor(
     private PaletteModel: Model<Palette>,
     private usersRepository?: MongoDBUsersRepository,
@@ -23,8 +23,10 @@ export default class MongoDBPalettesRepository implements IPaletteRepository {
     await this.usersRepository.update(user);
   }
 
-  async getSinglePalette(paletteId: String): Promise<Palette | null> {
-    const palette = await this.PaletteModel.findById(paletteId).exec();
+  async getPaletteById(paletteId: string, isPublic?: boolean): Promise<Palette | null> {
+    const palette = isPublic
+      ? await this.PaletteModel.findOne({ _id: paletteId, isPublic }).exec()
+      : await this.PaletteModel.findById(paletteId).exec();
     return palette;
   }
 
