@@ -17,15 +17,12 @@ export default class User {
 
   public password: string;
 
-  public palettes?: string[];
-
   public profilePicture?: string;
 
   constructor(props: UserProps, id: string = v4()) {
     this.username = props.username;
     this.email = props.email;
     this.password = props.password;
-    this.palettes = props.palettes;
     this.profilePicture = props.profilePicture;
     this._id = id;
   }

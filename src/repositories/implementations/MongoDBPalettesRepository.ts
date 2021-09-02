@@ -6,21 +6,11 @@ import MongoDBUsersRepository from './MongoDBUsersRepository';
 export default class MongoDBPalettesRepository implements IPalettesRepository {
   constructor(
     private PaletteModel: Model<Palette>,
-    private usersRepository?: MongoDBUsersRepository,
   ) {}
 
   async save(palette: Palette): Promise<void> {
     const newPalette = new this.PaletteModel(palette);
     await newPalette.save();
-
-    if (!this.usersRepository) throw new Error('No users repository provided!');
-
-    const user = await this.usersRepository?.findById(palette.ownerId);
-
-    if (!user) throw new Error("Couldn't find user with provided id!");
-
-    user.palettes?.push(palette._id);
-    await this.usersRepository.update(user);
   }
 
   async getPaletteById(paletteId: string, isPublic?: boolean): Promise<Palette | null> {
@@ -41,5 +31,9 @@ export default class MongoDBPalettesRepository implements IPalettesRepository {
       isPublic: true,
     }).exec();
     return palette;
+  }
+
+  async updatePalette(palette: Palette): Promise<void> {
+    await this.PaletteModel.findOneAndUpdate({ _id: palette._id }, palette);
   }
 }

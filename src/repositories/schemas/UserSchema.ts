@@ -25,10 +25,6 @@ const UserSchema = new Schema<User>({
     require: true,
     select: false,
   },
-  palettes: {
-    type: [String],
-    default: [],
-  },
   profilePicture: {
     type: String,
     default: '',

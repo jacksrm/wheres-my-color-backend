@@ -3,6 +3,7 @@ import createPalette from '@useCases/Palette/CreatePalette';
 import getSinglePalette from '@useCases/Palette/GetPalette';
 import authenticateUser from '@useCases/Authentication/AuthenticateUser';
 import getPublicPalette from '@useCases/Palette/GetPublicPalette';
+import updatePalette from '@useCases/Palette/UpdatePalete';
 
 const paletteRoutes = Router();
 
@@ -10,6 +11,12 @@ paletteRoutes.get(
   '/:paletteId',
   authenticateUser().middleware.handle(),
   getSinglePalette().controller.handle(),
+);
+
+paletteRoutes.put(
+  '/update/:paletteId',
+  authenticateUser().middleware.handle(),
+  updatePalette().controller.handle(),
 );
 
 paletteRoutes.get('/public/:paletteId', getPublicPalette().controller.handle());
