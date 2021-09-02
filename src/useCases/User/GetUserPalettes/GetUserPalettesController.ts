@@ -1,18 +1,13 @@
 import { Response } from 'express';
-import {
-  IGetUserPaletteRequestWithUserID,
-  IGetUserPalettesRequestDTO,
-} from './GetUserPalettesDTO';
+import { IRequestWithUserID } from 'interfaces/IRequestWithUserID';
+import { IGetUserPalettesRequestDTO } from './GetUserPalettesDTO';
 import GetUserPalettesUseCase from './GetUserPalettesUseCase';
 
 export default class GetUserPalettesController {
   constructor(private getUserPalettesUseCase: GetUserPalettesUseCase) {}
 
   handle() {
-    return async (
-      request: IGetUserPaletteRequestWithUserID,
-      response: Response,
-    ) => {
+    return async (request: IRequestWithUserID, response: Response) => {
       const { userId } = request;
       const { ownerId } = request.params as unknown as IGetUserPalettesRequestDTO;
 
