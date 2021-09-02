@@ -5,9 +5,11 @@ import MongoDBPalettesRepository from '@repositories/implementations/MongoDBPale
 import GetUserPalettesController from './GetUserPalettesController';
 import GetUserPalettesUseCase from './GetUserPalettesUseCase';
 
-const usersRepository = new MongoDBUsersRepository(UserModel);
-const palettesRepository = new MongoDBPalettesRepository(PaletteModel, usersRepository);
-const getUserPalettesUseCase = new GetUserPalettesUseCase(palettesRepository);
-const getUserPalettesController = new GetUserPalettesController(getUserPalettesUseCase);
+export default function getUserPalettes() {
+  const usersRepository = new MongoDBUsersRepository(UserModel);
+  const palettesRepository = new MongoDBPalettesRepository(PaletteModel, usersRepository);
+  const useCase = new GetUserPalettesUseCase(palettesRepository);
+  const controller = new GetUserPalettesController(useCase);
 
-export { getUserPalettesUseCase, getUserPalettesController };
+  return { useCase, controller };
+}

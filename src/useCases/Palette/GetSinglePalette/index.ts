@@ -5,12 +5,14 @@ import { UserModel } from '@repositories/schemas/UserSchema';
 import GetSinglePaletteController from './GetSinglePaletteController';
 import GetSinglePaletteUseCase from './GetSinglePaletteUseCase';
 
-const paletteRepository = new MongoDBPalettesRepository(
-  PaletteModel,
-  new MongoDBUsersRepository(UserModel),
-);
+export default function getSinglePalette() {
+  const paletteRepository = new MongoDBPalettesRepository(
+    PaletteModel,
+    new MongoDBUsersRepository(UserModel),
+  );
 
-const getSinglePaletteUseCase = new GetSinglePaletteUseCase(paletteRepository);
-const getSinglePaletteController = new GetSinglePaletteController(getSinglePaletteUseCase);
+  const useCase = new GetSinglePaletteUseCase(paletteRepository);
+  const controller = new GetSinglePaletteController(useCase);
 
-export { getSinglePaletteController, getSinglePaletteUseCase };
+  return { controller, useCase };
+}

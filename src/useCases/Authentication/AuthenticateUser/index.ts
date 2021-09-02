@@ -1,9 +1,9 @@
 import AuthenticateUserMiddleware from './AuthenticateUserMiddleware';
 import AuthenticateUserUseCase from './AuthenticateUserUseCase';
 
-const authenticateUserUseCase = new AuthenticateUserUseCase();
-const authenticateUserMiddleware = new AuthenticateUserMiddleware(
-  authenticateUserUseCase,
-);
+export default function authenticateUser() {
+  const useCase = new AuthenticateUserUseCase();
+  const middleware = new AuthenticateUserMiddleware(useCase);
 
-export { authenticateUserUseCase, authenticateUserMiddleware };
+  return { useCase, middleware };
+}
