@@ -5,7 +5,6 @@ import getSingleUser from '@useCases/User/GetSingleUser';
 import authenticateUser from '@useCases/Authentication/AuthenticateUser';
 import getPublicUserPalettes from '@useCases/User/GetPublicUserPalettes';
 
-
 const userRoutes = express.Router();
 
 userRoutes.post('/create', createUser().controller.handle());

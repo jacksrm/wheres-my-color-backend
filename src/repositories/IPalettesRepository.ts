@@ -1,10 +1,10 @@
 import Palette from '@entities/Palette';
 
-interface IPaletteRepository {
+interface IPalettesRepository {
   getUserPalettes(ownerId: string): Promise<Palette[]>;
   getPublicUserPalettes(ownerId: string): Promise<Palette[]>;
-  getSinglePalette(paletteId: String): Promise<Palette | null>;
+  getPaletteById(paletteId: String, isPublic?: boolean): Promise<Palette | null>;
   save(palette: Palette): Promise<void>;
 }
 
-export default IPaletteRepository;
+export default IPalettesRepository;

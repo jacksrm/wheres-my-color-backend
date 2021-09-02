@@ -1,4 +1,4 @@
-import IPaletteRepository from '@repositories/IPaletteRepository';
+import IPaletteRepository from '@repositories/IPalettesRepository';
 import { IGetUserPalettesRequestDTO } from '../GetUserPalettes/GetUserPalettesDTO';
 
 export default class GetPublicUserPalettesUseCase {
