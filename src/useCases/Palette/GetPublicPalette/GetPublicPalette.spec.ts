@@ -34,7 +34,7 @@ const paletteCollection = [
   ),
 ];
 
-describe('Testes de GetPublicPalette', () => {
+describe('Testes unitários de GetPublicPalette', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
