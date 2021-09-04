@@ -22,16 +22,18 @@ export default class UpdatePaletteUseCase {
     const canChange = matchPalette.authorizeChange.some(
       (authorizedUserId) => userId === authorizedUserId,
     );
-    if (!canChange) throw new UpdatePaletteError(400, 'Unauthorized!');
+    if (!canChange) {
+      throw new UpdatePaletteError(400, 'Unauthorized!');
+    }
 
     const palette = new Palette(
       {
-        colors: data.colors || matchPalette.colors,
+        colors: data.colors ?? matchPalette.colors,
         ownerId: matchPalette.ownerId,
-        name: data.name || matchPalette.name,
-        isPublic: data.isPublic || matchPalette.isPublic,
-        membersId: data.membersId || matchPalette.membersId,
-        authorizeChange: data.authorizeChange || matchPalette.authorizeChange,
+        name: data.name ?? matchPalette.name,
+        isPublic: data.isPublic ?? matchPalette.isPublic,
+        membersId: data.membersId ?? matchPalette.membersId,
+        authorizeChange: data.authorizeChange ?? matchPalette.authorizeChange,
       },
       data.paletteId,
     );
