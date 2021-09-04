@@ -11,7 +11,9 @@ export default class UserLoginUseCase {
 
     if (!user) throw new Error('Theres no user with this email!');
 
-    if (!checkEncodedPasswordUseCase(user, data.password)) {
+    const validPassword = await checkEncodedPasswordUseCase(user, data.password);
+
+    if (!validPassword) {
       throw new Error('Incorrect password');
     }
 

@@ -19,9 +19,10 @@ export default class UpdatePaletteUseCase {
 
     if (!matchPalette) throw new UpdatePaletteError(404, "Can't update this palette!");
 
-    matchPalette.authorizeChange.forEach((authorizedUserId) => {
-      if (authorizedUserId !== userId) throw new UpdatePaletteError(400, 'Unauthorized!');
-    });
+    const canChange = matchPalette.authorizeChange.some(
+      (authorizedUserId) => userId === authorizedUserId,
+    );
+    if (!canChange) throw new UpdatePaletteError(400, 'Unauthorized!');
 
     const palette = new Palette(
       {
