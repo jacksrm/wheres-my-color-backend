@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { ICreatePaletteRequestDTO } from './CreatePaletteDTO';
-import CreatePaletteUseCase from './CreatePaletteUseCase';
+import { CreatePaletteUseCase } from './CreatePaletteUseCase';
 
-export default class CreatePaletteController {
+export class CreatePaletteController {
   constructor(private createPaletteUseCase: CreatePaletteUseCase) {}
 
   handle() {

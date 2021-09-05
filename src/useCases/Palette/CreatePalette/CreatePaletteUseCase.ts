@@ -2,12 +2,12 @@ import Palette from '@entities/Palette';
 import IPalettesRepository from '@repositories/IPalettesRepository';
 import { ICreatePaletteRequestDTO } from './CreatePaletteDTO';
 
-export default class CreatePaletteUseCase {
+export class CreatePaletteUseCase {
   constructor(private palettesRepositories: IPalettesRepository) {}
 
-  async execute(data: ICreatePaletteRequestDTO): Promise<void> {
+  async execute(data: ICreatePaletteRequestDTO): Promise<Palette> {
     const palette = new Palette(data);
 
-    await this.palettesRepositories.save(palette);
+    return this.palettesRepositories.save(palette);
   }
 }

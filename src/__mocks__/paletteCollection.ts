@@ -3,6 +3,12 @@ import Palette from '@entities/Palette';
 export const publicPaletteId = 'palette1111';
 export const privatePaletteId = 'palette3333';
 
+export const createPaletteData = {
+  ownerId: 'user1111',
+  name: 'Banido... Banido... Banido...',
+  isPublic: false,
+};
+
 export const changePaletteData = (
   {
     isPublic: false,
