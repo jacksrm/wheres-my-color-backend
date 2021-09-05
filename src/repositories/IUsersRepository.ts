@@ -4,7 +4,8 @@ interface IUsersRepository {
   findByEmail(email: string, withPassword?: boolean): Promise<User | null>;
   findByUsername(username: string, withPassword?: boolean): Promise<User | null>;
   findById(id: string, withPassword?: boolean): Promise<User | null>;
-  update(user: User): Promise<void>;
+  getAllUsers(): Promise<User[]>
+  update(user: User): Promise<User| null>;
   save(user: User): Promise<User>;
 }
 

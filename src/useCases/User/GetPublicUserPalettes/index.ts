@@ -3,7 +3,7 @@ import MongoDBPalettesRepository from '@repositories/implementations/MongoDBPale
 import GetPublicUserPalettesUseCase from './GetPublicUserPalettesUseCase';
 import GetPublicUserPalettesController from './GetPublicUserPalettesController';
 
-export default function getPublicUserPalettes() {
+export default function getPublicUserPalettesModule() {
   const palettesRepository = new MongoDBPalettesRepository(PaletteModel);
   const useCase = new GetPublicUserPalettesUseCase(palettesRepository);
   const controller = new GetPublicUserPalettesController(useCase);

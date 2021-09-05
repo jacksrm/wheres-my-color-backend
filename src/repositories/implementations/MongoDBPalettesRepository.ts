@@ -8,9 +8,13 @@ export default class MongoDBPalettesRepository implements IPalettesRepository {
     private PaletteModel: Model<Palette>,
   ) {}
 
-  async save(palette: Palette): Promise<void> {
+  getAllPublicPalettes(): Promise<Palette[]> {
+    return this.PaletteModel.find({ isPublic: true }).exec();
+  }
+
+  async save(palette: Palette): Promise<Palette> {
     const newPalette = new this.PaletteModel(palette);
-    await newPalette.save();
+    return newPalette.save();
   }
 
   async getPaletteById(paletteId: string, isPublic?: boolean): Promise<Palette | null> {
@@ -33,7 +37,7 @@ export default class MongoDBPalettesRepository implements IPalettesRepository {
     return palette;
   }
 
-  async updatePalette(palette: Palette): Promise<void> {
-    await this.PaletteModel.findOneAndUpdate({ _id: palette._id }, palette);
+  async updatePalette(palette: Palette): Promise<Palette | null> {
+    return this.PaletteModel.findOneAndUpdate({ _id: palette._id }, palette);
   }
 }
