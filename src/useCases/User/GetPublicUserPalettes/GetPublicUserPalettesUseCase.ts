@@ -1,7 +1,7 @@
 import IPaletteRepository from '@repositories/IPalettesRepository';
 import { IGetUserPalettesRequestDTO } from '../GetUserPalettes/GetUserPalettesDTO';
 
-export default class GetPublicUserPalettesUseCase {
+export class GetPublicUserPalettesUseCase {
   constructor(private palettesRepository: IPaletteRepository) {}
 
   async execute(data: IGetUserPalettesRequestDTO) {
