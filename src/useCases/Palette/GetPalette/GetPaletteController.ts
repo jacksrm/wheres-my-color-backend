@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { IRequestWithUserID } from '@interfaces/IRequestWithUserID';
 import { IGetPaletteRequestDTO } from './GetPaletteDTO';
-import GetPaletteUseCase from './GetPaletteUseCase';
+import { GetPaletteUseCase } from './GetPaletteUseCase';
 
-export default class GetPaletteController {
+export class GetPaletteController {
   constructor(private getPaletteUseCase: GetPaletteUseCase) {}
 
   handle() {
