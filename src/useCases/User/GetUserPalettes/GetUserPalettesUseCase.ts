@@ -2,7 +2,7 @@ import Palette from '@entities/Palette';
 import IPaletteRepository from '@repositories/IPalettesRepository';
 import { IGetUserPalettesRequestDTO } from './GetUserPalettesDTO';
 
-export default class GetUserPalettesUseCase {
+export class GetUserPalettesUseCase {
   constructor(private palettesRepository: IPaletteRepository) {}
 
   async execute(data: IGetUserPalettesRequestDTO): Promise<Palette[]> {

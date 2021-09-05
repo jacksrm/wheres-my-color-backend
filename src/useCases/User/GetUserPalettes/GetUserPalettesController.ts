@@ -1,9 +1,9 @@
 import { Response } from 'express';
 import { IRequestWithUserID } from 'interfaces/IRequestWithUserID';
 import { IGetUserPalettesRequestDTO } from './GetUserPalettesDTO';
-import GetUserPalettesUseCase from './GetUserPalettesUseCase';
+import { GetUserPalettesUseCase } from './GetUserPalettesUseCase';
 
-export default class GetUserPalettesController {
+export class GetUserPalettesController {
   constructor(private getUserPalettesUseCase: GetUserPalettesUseCase) {}
 
   handle() {
