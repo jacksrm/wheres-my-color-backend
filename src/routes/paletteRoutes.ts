@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import createPaletteModule from '@useCases/Palette/CreatePalette';
+import { createPaletteModule } from '@useCases/Palette/CreatePalette';
 import { getPaletteModule } from '@useCases/Palette/GetPalette';
-import authenticateUserModule from '@useCases/Authentication/AuthenticateUser';
+import { authenticateUserModule } from '@useCases/Authentication/AuthenticateUser';
 import { getPublicPaletteModule } from '@useCases/Palette/GetPublicPalette';
 import { updatePaletteModule } from '@useCases/Palette/UpdatePalete';
 
@@ -18,6 +18,6 @@ paletteRoutes.put('/update/:paletteId', authenticate.middleware, update.controll
 
 paletteRoutes.get('/public/:paletteId', getPublic.controller);
 
-paletteRoutes.post('/create', create.controller);
+paletteRoutes.post('/create', authenticate.middleware, create.controller);
 
 export default paletteRoutes;
