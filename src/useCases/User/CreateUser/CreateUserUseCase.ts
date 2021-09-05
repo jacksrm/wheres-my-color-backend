@@ -3,6 +3,8 @@ import IUsersRepository from '@repositories/IUsersRepository';
 import encodeUserPassword from '@useCases/Authentication/EncodePassword';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 
+const encodePassword = encodeUserPassword();
+
 export default class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
@@ -16,7 +18,7 @@ export default class CreateUserUseCase {
 
     const user = new User(data);
 
-    await encodeUserPassword(user);
+    await encodePassword(user);
 
     const createdUser = await this.usersRepository.save(user);
     return createdUser;

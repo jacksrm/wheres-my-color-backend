@@ -8,5 +8,8 @@ export default function getPublicUserPalettes() {
   const useCase = new GetPublicUserPalettesUseCase(palettesRepository);
   const controller = new GetPublicUserPalettesController(useCase);
 
-  return { useCase, controller };
+  return {
+    useCase: useCase.execute,
+    controller: controller.handle(),
+  };
 }

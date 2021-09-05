@@ -1,8 +1,7 @@
-import User from '@entities/User';
 import GenerateUserTokenUseCase from './GenerateUserTokenUseCase';
 
-export default function generateUserToken(user: User) {
-  const generateUserTokenUseCase = new GenerateUserTokenUseCase();
+export default function generateUserTokenModule() {
+  const useCase = new GenerateUserTokenUseCase();
 
-  return generateUserTokenUseCase.execute(user);
+  return useCase.execute;
 }

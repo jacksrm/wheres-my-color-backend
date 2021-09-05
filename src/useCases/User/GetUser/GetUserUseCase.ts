@@ -1,10 +1,10 @@
 import IUsersRepository from '@repositories/IUsersRepository';
-import { IGetSingleUserRequestDTO } from './GetSingleUserDTO';
+import { IGetUserRequestDTO } from './GetUserDTO';
 
-export default class GetSingleUserUseCase {
+export default class GetUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  async execute(data: IGetSingleUserRequestDTO) {
+  async execute(data: IGetUserRequestDTO) {
     const user = await this.usersRepository.findById(data.userId);
 
     if (!user) throw new Error('User not found!');

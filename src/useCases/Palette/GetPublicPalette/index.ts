@@ -3,10 +3,13 @@ import { PaletteModel } from '@repositories/schemas/PaletteSchema';
 import GetPublicPaletteController from './GetPublicPaletteController';
 import GetPublicPaletteUseCase from './GetPublicPaletteUseCase';
 
-export default function getPublicPalette() {
+export default function getPublicPaletteModule() {
   const paletteRepository = new MongoDBPalettesRepository(PaletteModel);
   const useCase = new GetPublicPaletteUseCase(paletteRepository);
   const controller = new GetPublicPaletteController(useCase);
 
-  return { useCase, controller };
+  return {
+    useCase: useCase.execute,
+    controller: controller.handle(),
+  };
 }

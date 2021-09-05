@@ -5,6 +5,7 @@ import {
   IUpdatePaletteRequestBodyDTO,
   IUpdatePaletteRequestParamsDTO,
 } from './UpdatePaletteDTO';
+import UpdatePaletteError from './UpdatePaletteError';
 
 export default class UpdatePaletteController {
   constructor(private updatePaletteUseCase: UpdatePaletteUseCase) {}
@@ -12,11 +13,17 @@ export default class UpdatePaletteController {
   handle() {
     return async (request: IRequestWithUserID, response: Response) => {
       const { userId } = request;
-      const { paletteId } = request.params as unknown as IUpdatePaletteRequestParamsDTO;
+      const { paletteId } = (
+        request.params as unknown as IUpdatePaletteRequestParamsDTO);
       const { colors, name, isPublic, membersId, authorizeChange } = (
-        request.body as unknown as IUpdatePaletteRequestBodyDTO
-      );
+        request.body as unknown as IUpdatePaletteRequestBodyDTO);
 
+      if (!userId) {
+        return response.status(400).json({
+          message:
+            "We can't process your request because theres no valid user ID!",
+        });
+      }
       try {
         await this.updatePaletteUseCase.execute(
           {
@@ -27,12 +34,20 @@ export default class UpdatePaletteController {
             authorizeChange,
             paletteId,
           },
-          userId!,
+          userId,
         );
 
         return response.status(200).json({ message: 'Updated successfully!' });
-      } catch ({ message, statusCode = 400 }) {
-        return response.status(statusCode).json({ message });
+      } catch (error) {
+        if (error instanceof UpdatePaletteError) {
+          return response
+            .status(error.statusCode)
+            .json({ message: error.message });
+        }
+
+        return response
+          .status(400)
+          .json({ message: 'Unexpected error processing your request!' });
       }
     };
   }
