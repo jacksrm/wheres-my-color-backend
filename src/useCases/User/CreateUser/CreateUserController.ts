@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CreateUserUseCase from './CreateUserUseCase';
+import { CreateUserUseCase } from './CreateUserUseCase';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 
-export default class CreateUserController {
+export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   handle() {

@@ -1,11 +1,11 @@
 import User from '@entities/User';
 import IUsersRepository from '@repositories/IUsersRepository';
-import encodeUserPassword from '@useCases/Authentication/EncodePassword';
+import { encodeUserPasswordModule } from '@useCases/Authentication/EncodePassword';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 
-const encodePassword = encodeUserPassword();
+const encodePassword = encodeUserPasswordModule();
 
-export default class CreateUserUseCase {
+export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute(data: ICreateUserRequestDTO) {

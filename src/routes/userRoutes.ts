@@ -1,5 +1,5 @@
 import express from 'express';
-import createUserModule from '@useCases/User/CreateUser';
+import { createUserModule } from '@useCases/User/CreateUser';
 import { getPublicUserPalettesModule } from '@useCases/User/GetPublicUserPalettes';
 import { getUserPalettesModule } from '@useCases/User/GetUserPalettes';
 import { getUserModule } from '@useCases/User/GetUser';
