@@ -1,4 +1,17 @@
 import Palette from '@entities/Palette';
+import {
+  IUpdatePaletteRequestBodyDTO,
+  IUpdatePaletteRequestParamsDTO,
+} from '@useCases/Palette/UpdatePalete/UpdatePaletteDTO';
+
+// export const changePaletteData: IUpdatePaletteRequestBodyDTO & IUpdatePaletteRequestParamsDTO = (
+export const changePaletteData = (
+  {
+    isPublic: false,
+    name: 'Paleta de Edinaldo Pereira',
+    paletteId: 'palette1111',
+  }
+);
 
 export const paletteCollection = () => [
   new Palette(

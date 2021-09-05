@@ -1,13 +1,13 @@
 import { Response } from 'express';
 import { IRequestWithUserID } from '@interfaces/IRequestWithUserID';
-import UpdatePaletteUseCase from './UpdatePaletteUseCase';
+import { UpdatePaletteUseCase } from './UpdatePaletteUseCase';
 import {
   IUpdatePaletteRequestBodyDTO,
   IUpdatePaletteRequestParamsDTO,
 } from './UpdatePaletteDTO';
-import UpdatePaletteError from './UpdatePaletteError';
+import { UpdatePaletteError } from './UpdatePaletteError';
 
-export default class UpdatePaletteController {
+export class UpdatePaletteController {
   constructor(private updatePaletteUseCase: UpdatePaletteUseCase) {}
 
   handle() {

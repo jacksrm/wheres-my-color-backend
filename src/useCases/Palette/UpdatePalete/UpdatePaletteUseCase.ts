@@ -1,12 +1,12 @@
 import Palette from '@entities/Palette';
 import IPalettesRepository from '@repositories/IPalettesRepository';
-import UpdatePaletteError from './UpdatePaletteError';
+import { UpdatePaletteError } from './UpdatePaletteError';
 import {
   IUpdatePaletteRequestBodyDTO,
   IUpdatePaletteRequestParamsDTO,
 } from './UpdatePaletteDTO';
 
-export default class UpdatePaletteUseCase {
+export class UpdatePaletteUseCase {
   constructor(private palettesRepository: IPalettesRepository) {}
 
   async execute(
@@ -38,6 +38,6 @@ export default class UpdatePaletteUseCase {
       data.paletteId,
     );
 
-    await this.palettesRepository.updatePalette(palette);
+    return this.palettesRepository.updatePalette(palette);
   }
 }
