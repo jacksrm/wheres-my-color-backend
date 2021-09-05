@@ -1,10 +1,8 @@
 import Palette from '@entities/Palette';
-import {
-  IUpdatePaletteRequestBodyDTO,
-  IUpdatePaletteRequestParamsDTO,
-} from '@useCases/Palette/UpdatePalete/UpdatePaletteDTO';
 
-// export const changePaletteData: IUpdatePaletteRequestBodyDTO & IUpdatePaletteRequestParamsDTO = (
+export const publicPaletteId = 'palette1111';
+export const privatePaletteId = 'palette3333';
+
 export const changePaletteData = (
   {
     isPublic: false,

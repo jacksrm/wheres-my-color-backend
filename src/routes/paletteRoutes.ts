@@ -2,7 +2,7 @@ import { Router } from 'express';
 import createPaletteModule from '@useCases/Palette/CreatePalette';
 import getPaletteModule from '@useCases/Palette/GetPalette';
 import authenticateUserModule from '@useCases/Authentication/AuthenticateUser';
-import getPublicPaletteModule from '@useCases/Palette/GetPublicPalette';
+import { getPublicPaletteModule } from '@useCases/Palette/GetPublicPalette';
 import { updatePaletteModule } from '@useCases/Palette/UpdatePalete';
 
 const paletteRoutes = Router();
