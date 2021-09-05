@@ -31,6 +31,9 @@
       ],
       "@interfaces/*": [
         "./interfaces/*"
+      ],
+      "@mocks/*": [
+        "./__mocks__/*"
       ]
     }
   },

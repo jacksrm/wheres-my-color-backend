@@ -32,12 +32,13 @@
   },
   "rules": {
     "class-methods-use-this": "off",
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
     "no-console": "off",
     "no-useless-constructor": "off",
     "no-unused-vars": "off",
     "no-empty-function": "off",
     "no-underscore-dangle": "off",
-    "object-curly-newline": "off",
-    "import/extensions": "off"
+    "object-curly-newline": "off"
   }
 }

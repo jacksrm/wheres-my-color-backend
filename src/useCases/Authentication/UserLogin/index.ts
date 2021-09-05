@@ -8,5 +8,8 @@ export default function userLoginModule() {
   const useCase = new UserLoginUseCase(userRepository);
   const controller = new UserLoginController(useCase);
 
-  return { useCase: useCase.execute, controller: controller.handle };
+  return {
+    useCase: useCase.execute,
+    controller: controller.handle(),
+  };
 }

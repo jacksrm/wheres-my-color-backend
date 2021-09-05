@@ -1,9 +1,14 @@
 import User from '@entities/User';
-import { Model } from 'mongoose';
+import { Model, connection } from 'mongoose';
 import IUsersRepository from '@repositories/IUsersRepository';
 
 export default class MongoDBUsersRepository implements IUsersRepository {
   constructor(private UserModel: Model<User>) {}
+
+  async getAllUsers(): Promise<User[]> {
+    const users = await this.UserModel.find({});
+    return users;
+  }
 
   async findByEmail(
     email: string,
@@ -32,8 +37,8 @@ export default class MongoDBUsersRepository implements IUsersRepository {
     return user;
   }
 
-  async update(user: User): Promise<void> {
-    await this.UserModel.findOneAndUpdate({ _id: user._id }, { ...user });
+  async update(user: User): Promise<User | null> {
+    return this.UserModel.findOneAndUpdate({ _id: user._id }, { ...user });
   }
 
   async save(user: User): Promise<User> {
