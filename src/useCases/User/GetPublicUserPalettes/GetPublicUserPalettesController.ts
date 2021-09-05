@@ -1,3 +1,4 @@
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { Request, Response } from 'express';
 import { IGetUserPalettesRequestDTO } from '../GetUserPalettes/GetUserPalettesDTO';
 import { GetPublicUserPalettesUseCase } from './GetPublicUserPalettesUseCase';
@@ -14,7 +15,7 @@ export class GetPublicUserPalettesController {
 
         return response.status(200).json({ palettes });
       } catch (error) {
-        return response.status(400).json({ message: 'An error has ocurred!' });
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

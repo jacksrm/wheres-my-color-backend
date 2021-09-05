@@ -1,3 +1,4 @@
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { Request, Response } from 'express';
 import { IndexAllUsersAndPalettesUseCase } from './IndexAllUsersAndPalettesUseCase';
 
@@ -11,7 +12,7 @@ export class IndexAllUsersAndPalettesController {
 
         return response.status(200).json(data);
       } catch {
-        return response.sendStatus(400);
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

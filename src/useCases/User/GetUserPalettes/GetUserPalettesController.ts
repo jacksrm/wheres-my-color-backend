@@ -1,3 +1,4 @@
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { Response } from 'express';
 import { IRequestWithUserID } from 'interfaces/IRequestWithUserID';
 import { IGetUserPalettesRequestDTO } from './GetUserPalettesDTO';
@@ -17,7 +18,7 @@ export class GetUserPalettesController {
         const palettes = await this.getUserPalettesUseCase.execute({ ownerId });
         return response.status(200).json({ palettes });
       } catch (error) {
-        return response.status(400).json({ message: 'An error has ocurred!' });
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

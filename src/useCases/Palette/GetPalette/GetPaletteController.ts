@@ -25,8 +25,8 @@ export class GetPaletteController {
         }
 
         return response.status(200).json({ palette });
-      } catch (error: any) {
-        return response.status(404).json({ message: error.Message });
+      } catch (error) {
+        return response.sendStatus(404);
       }
     };
   }

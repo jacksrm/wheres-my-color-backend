@@ -1,5 +1,20 @@
 import User from '@entities/User';
 
+export const validLoginData = {
+  email: 'edinaldopereira@meuapp.com',
+  password: '1234567890',
+};
+
+export const invalidLoginEmail = {
+  email: 'emailinvalido@meuapp.com',
+  password: '1234567890',
+};
+
+export const invalidLoginPass = {
+  email: 'edinaldopereira@meuapp.com',
+  password: 'senhainvalida',
+};
+
 export const newUserData = {
   username: 'NewUser',
   email: 'newuser@meuapp.com',

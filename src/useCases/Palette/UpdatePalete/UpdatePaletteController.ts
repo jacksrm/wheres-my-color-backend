@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { IRequestWithUserID } from '@interfaces/IRequestWithUserID';
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { UpdatePaletteUseCase } from './UpdatePaletteUseCase';
 import {
   IUpdatePaletteRequestBodyDTO,
@@ -40,14 +41,10 @@ export class UpdatePaletteController {
         return response.status(200).json({ message: 'Updated successfully!' });
       } catch (error) {
         if (error instanceof UpdatePaletteError) {
-          return response
-            .status(error.statusCode)
-            .json({ message: error.message });
+          return response.status(error.statusCode).json({ message: error.message });
         }
 
-        return response
-          .status(400)
-          .json({ message: 'Unexpected error processing your request!' });
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

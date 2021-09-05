@@ -1,7 +1,9 @@
 import User from '@entities/User';
 import IUsersRepository from '@repositories/IUsersRepository';
+import { encodeUserPasswordModule } from '@useCases/Authentication/EncodePassword';
 import { userCollection } from './userCollection';
 
+const encode = encodeUserPasswordModule();
 export class UsersRepository implements IUsersRepository {
   getAllUsers(): Promise<User[]> {
     return new Promise((resolve) => resolve(userCollection()));
@@ -11,15 +13,15 @@ export class UsersRepository implements IUsersRepository {
     email: string,
     withPassword?: boolean,
   ): Promise<User | null> {
-    return new Promise((resolve) => {
-      const match = userCollection().find((user) => user.email === email);
+    const match = userCollection().find((user) => user.email === email);
+    if (!match) return null;
 
-      if (withPassword) resolve(match ?? null);
-      else if (match) {
-        const { password, ...newMatch } = match;
-        resolve(newMatch as User);
-      } else resolve(null);
-    });
+    await encode(match);
+
+    if (withPassword) return match;
+
+    const { password, ...newMatch } = match;
+    return newMatch as User;
   }
 
   async findByUsername(

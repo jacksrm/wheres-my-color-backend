@@ -1,3 +1,4 @@
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { Request, Response } from 'express';
 import { ICreatePaletteRequestDTO } from './CreatePaletteDTO';
 import { CreatePaletteUseCase } from './CreatePaletteUseCase';
@@ -16,11 +17,9 @@ export class CreatePaletteController {
         });
         return response
           .status(201)
-          .json({ message: `Palette ${name} was added successfully!` });
+          .json({ message: `Palette "${name}" was added successfully!` });
       } catch (error) {
-        return response
-          .status(400)
-          .json({ message: 'There was and error processing your request!' });
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }
