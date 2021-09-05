@@ -4,7 +4,7 @@ import { encodeUserPasswordModule } from '.';
 
 const encodePass = encodeUserPasswordModule();
 
-describe('Testa EnodePasswordUseCase.', () => {
+describe.skip('Testa EnodePasswordUseCase.', () => {
   test('Verifica se o password foi encriptado.', async () => {
     const user = userCollection()[0];
     await encodePass(user);

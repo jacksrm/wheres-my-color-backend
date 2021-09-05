@@ -1,29 +1,24 @@
-import User from '@entities/User';
-import checkUserEncodedPassword from '.';
-import EncodePasswordUseCase from '../EncodePassword/EncodePasswordUseCase';
+import { userCollection } from '@mocks/userCollection';
+import { checkUserEncodedPasswordModule } from '.';
+import { encodeUserPasswordModule } from '../EncodePassword';
 
-const userData = {
-  email: 'jacl@meuapp.com',
-  password: '123456789',
-  username: 'JackSR',
-};
+const user = userCollection()[0];
+const checkPass = checkUserEncodedPasswordModule();
+const encodePass = encodeUserPasswordModule();
 
-const user = new User(userData);
-const encodePasswordUseCase = new EncodePasswordUseCase();
-
-describe.skip('Testes de CheckEncodedPassword', () => {
+describe('Testes de CheckEncodedPassword', () => {
   beforeAll(async () => {
-    await encodePasswordUseCase.execute(user);
+    await encodePass(user);
   });
 
   test('Deve retornar true quando a senha for correta', async () => {
-    const verification = await checkUserEncodedPassword(user, userData.password);
+    const verification = await checkPass(user, userCollection()[0].password);
 
     expect(verification).toBeTruthy();
   });
 
   test('Deve retornar false quando a senha estiver incorreta.', async () => {
-    const verification = await checkUserEncodedPassword(user, 'abraCadabra');
+    const verification = await checkPass(user, 'abraCadabra');
 
     expect(verification).toBeFalsy();
   });

@@ -1,6 +1,6 @@
-import CheckEncodedPasswordUseCase from './CheckEncodedPasswordUseCase';
+import { CheckEncodedPasswordUseCase } from './CheckEncodedPasswordUseCase';
 
-export default function checkUserEncodedPasswordModule() {
+export function checkUserEncodedPasswordModule() {
   const checkPass = new CheckEncodedPasswordUseCase();
   return checkPass.execute;
 }
