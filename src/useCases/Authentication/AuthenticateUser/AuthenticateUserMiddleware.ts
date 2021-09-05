@@ -1,10 +1,7 @@
 import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { NextFunction, Response } from 'express';
 import { IRequestWithUserID } from 'interfaces/IRequestWithUserID';
-import {
-  IAuthenticateUserJWT,
-  IAuthenticateUserRequestDTO,
-} from './AuthenticateUserDTO';
+import { IAuthenticateUserRequestDTO } from './AuthenticateUserDTO';
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
 export class AuthenticateUserMiddleware {

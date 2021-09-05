@@ -1,4 +1,3 @@
-import User from '@entities/User';
 import { userCollection } from '@mocks/userCollection';
 import { encodeUserPasswordModule } from '.';
 

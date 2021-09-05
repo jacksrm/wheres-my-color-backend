@@ -1,4 +1,4 @@
-import IUsersRepository from '@repositories/IUsersRepository';
+import { IUsersRepository } from '@repositories/IUsersRepository';
 import { checkUserEncodedPasswordModule } from '../CheckUserEncodedPassword';
 import { generateUserTokenModule } from '../GenerateUserToken';
 import { IUserLoginRequestDTO } from './IUserLoginDTO';

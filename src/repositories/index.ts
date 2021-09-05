@@ -1,5 +1,5 @@
-import MongoDBPalettesRepository from './implementations/MongoDBPalettesRepository';
-import MongoDBUsersRepository from './implementations/MongoDBUsersRepository';
+import { MongoDBPalettesRepository } from './implementations/MongoDBPalettesRepository';
+import { MongoDBUsersRepository } from './implementations/MongoDBUsersRepository';
 import { PaletteModel } from './schemas/PaletteSchema';
 import { UserModel } from './schemas/UserSchema';
 

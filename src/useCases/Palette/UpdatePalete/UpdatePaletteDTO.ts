@@ -1,4 +1,4 @@
-import Color from '@entities/Color';
+import { Color } from '@entities/Color';
 
 export interface IUpdatePaletteRequestBodyDTO {
   colors?: Color[];

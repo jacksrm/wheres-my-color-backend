@@ -1,11 +1,11 @@
-import MongoDBUsersRepository from '@repositories/implementations/MongoDBUsersRepository';
-import { UserModel } from '@repositories/schemas/UserSchema';
+import { repositoriesModule } from '@repositories/index';
 import { UserLoginController } from './UserLoginController';
 import { UserLoginUseCase } from './UserLoginUserCase';
 
+const repos = repositoriesModule();
+
 export function userLoginModule() {
-  const userRepository = new MongoDBUsersRepository(UserModel);
-  const useCase = new UserLoginUseCase(userRepository);
+  const useCase = new UserLoginUseCase(repos.users);
   const controller = new UserLoginController(useCase);
 
   return {

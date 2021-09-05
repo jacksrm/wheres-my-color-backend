@@ -1,11 +1,11 @@
-import MongoDBPalettesRepository from '@repositories/implementations/MongoDBPalettesRepository';
-import { PaletteModel } from '@repositories/schemas/PaletteSchema';
+import { repositoriesModule } from '@repositories/index';
 import { UpdatePaletteController } from './UpdatePaletteController';
 import { UpdatePaletteUseCase } from './UpdatePaletteUseCase';
 
+const repos = repositoriesModule();
+
 export function updatePaletteModule() {
-  const palettesRepository = new MongoDBPalettesRepository(PaletteModel);
-  const useCase = new UpdatePaletteUseCase(palettesRepository);
+  const useCase = new UpdatePaletteUseCase(repos.palettes);
   const controller = new UpdatePaletteController(useCase);
 
   return {

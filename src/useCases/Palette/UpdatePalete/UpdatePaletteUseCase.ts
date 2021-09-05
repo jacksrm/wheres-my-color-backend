@@ -1,5 +1,5 @@
-import Palette from '@entities/Palette';
-import IPalettesRepository from '@repositories/IPalettesRepository';
+import { Palette } from '@entities/Palette';
+import { IPalettesRepository } from '@repositories/IPalettesRepository';
 import { UpdatePaletteError } from './UpdatePaletteError';
 import {
   IUpdatePaletteRequestBodyDTO,

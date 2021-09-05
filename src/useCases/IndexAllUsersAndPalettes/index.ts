@@ -3,6 +3,7 @@ import { IndexAllUsersAndPalettesController } from './IndexAllUsersAndPalettesCo
 import { IndexAllUsersAndPalettesUseCase } from './IndexAllUsersAndPalettesUseCase';
 
 const repositories = repositoriesModule();
+
 export function indexAllUsersAndPalettesModule() {
   const useCase = new IndexAllUsersAndPalettesUseCase(
     repositories.users,

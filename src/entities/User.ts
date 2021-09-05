@@ -1,5 +1,4 @@
 import { v4 } from 'uuid';
-import Palette from './Palette';
 
 interface UserProps {
   username: string;
@@ -8,7 +7,7 @@ interface UserProps {
   profilePicture?: string;
 }
 
-export default class User {
+export class User {
   public readonly _id: string;
 
   public email: string;

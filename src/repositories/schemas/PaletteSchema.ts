@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import Palette from '@entities/Palette';
+import { Palette } from '@entities/Palette';
 import { ColorSchema } from './ColorSchema';
 
 const PaletteSchema = new Schema<Palette>({

@@ -1,7 +1,6 @@
 import { IRequestWithUserID } from '@interfaces/IRequestWithUserID';
 import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
-import { Request, Response } from 'express';
-import { ICreatePaletteRequestDTO } from './CreatePaletteDTO';
+import { Response } from 'express';
 import { CreatePaletteUseCase } from './CreatePaletteUseCase';
 
 export class CreatePaletteController {

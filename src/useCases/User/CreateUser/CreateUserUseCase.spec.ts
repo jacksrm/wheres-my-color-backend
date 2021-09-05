@@ -1,6 +1,5 @@
 import { mockRepos } from '@mocks/index';
 import {
-  userCollection,
   newUserData,
   conflictEmailUserData,
   conflictUsernameUserData,
@@ -8,7 +7,6 @@ import {
 import { CreateUserUseCase } from './CreateUserUseCase';
 
 const repos = mockRepos();
-const users = userCollection();
 
 describe('Testes de CreateUserUseCase.', () => {
   test('testa se ao passar os dados do usuário, um novo registro é criado', async () => {

@@ -1,5 +1,5 @@
-import User from '@entities/User';
-import IUsersRepository from '@repositories/IUsersRepository';
+import { User } from '@entities/User';
+import { IUsersRepository } from '@repositories/IUsersRepository';
 import { encodeUserPasswordModule } from '@useCases/Authentication/EncodePassword';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 

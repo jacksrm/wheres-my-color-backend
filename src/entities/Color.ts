@@ -4,7 +4,7 @@ interface ColorProps {
   value: string;
   title?: string
 }
-export default class Color {
+export class Color {
   public readonly _id: string;
 
   public value: string;
