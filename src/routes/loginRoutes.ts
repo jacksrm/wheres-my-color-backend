@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import userLogin from '@useCases/Authentication/UserLogin';
+import userLoginModule from '@useCases/Authentication/UserLogin';
 
 const loginRoutes = Router();
-const { controller } = userLogin();
+const login = userLoginModule();
 
-loginRoutes.post('/', controller());
+loginRoutes.post('/', login.controller);
 
 export default loginRoutes;

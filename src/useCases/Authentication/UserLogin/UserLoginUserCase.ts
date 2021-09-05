@@ -1,7 +1,10 @@
 import IUsersRepository from '@repositories/IUsersRepository';
-import checkEncodedPasswordUseCase from '../CheckUserEncodedPassword';
-import generateUserToken from '../GenerateUserToken';
+import checkEncodedPasswordModule from '../CheckUserEncodedPassword';
+import generateUserTokenModule from '../GenerateUserToken';
 import { IUserLoginRequestDTO } from './IUserLoginDTO';
+
+const generateToken = generateUserTokenModule();
+const checkPassword = checkEncodedPasswordModule();
 
 export default class UserLoginUseCase {
   constructor(private userRepository: IUsersRepository) {}
@@ -11,13 +14,13 @@ export default class UserLoginUseCase {
 
     if (!user) throw new Error('Theres no user with this email!');
 
-    const validPassword = await checkEncodedPasswordUseCase(user, data.password);
+    const validPassword = await checkPassword(user, data.password);
 
     if (!validPassword) {
       throw new Error('Incorrect password');
     }
 
-    const token = generateUserToken(user);
+    const token = generateToken(user);
     return token;
   }
 }

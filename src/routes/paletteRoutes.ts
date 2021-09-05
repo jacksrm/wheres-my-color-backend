@@ -1,27 +1,23 @@
 import { Router } from 'express';
-import createPalette from '@useCases/Palette/CreatePalette';
-import getSinglePalette from '@useCases/Palette/GetPalette';
+import createPaletteModule from '@useCases/Palette/CreatePalette';
+import getPaletteModule from '@useCases/Palette/GetPalette';
 import authenticateUserModule from '@useCases/Authentication/AuthenticateUser';
-import getPublicPalette from '@useCases/Palette/GetPublicPalette';
-import updatePalette from '@useCases/Palette/UpdatePalete';
+import getPublicPaletteModule from '@useCases/Palette/GetPublicPalette';
+import updatePaletteModule from '@useCases/Palette/UpdatePalete';
 
 const paletteRoutes = Router();
 const authenticate = authenticateUserModule();
+const update = updatePaletteModule();
+const getPublic = getPublicPaletteModule();
+const getPalette = getPaletteModule();
+const create = createPaletteModule();
 
-paletteRoutes.get(
-  '/:paletteId',
-  authenticate.middleware,
-  getSinglePalette().controller.handle(),
-);
+paletteRoutes.get('/:paletteId', authenticate.middleware, getPalette.controller);
 
-paletteRoutes.put(
-  '/update/:paletteId',
-  authenticate.middleware,
-  updatePalette().controller.handle(),
-);
+paletteRoutes.put('/update/:paletteId', authenticate.middleware, update.controller);
 
-paletteRoutes.get('/public/:paletteId', getPublicPalette().controller.handle());
+paletteRoutes.get('/public/:paletteId', getPublic.controller);
 
-paletteRoutes.post('/create', createPalette().controller.handle());
+paletteRoutes.post('/create', create.controller);
 
 export default paletteRoutes;

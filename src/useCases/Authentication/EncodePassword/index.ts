@@ -1,6 +1,6 @@
 import EncodePasswordUseCase from './EncodePasswordUseCase';
 
-export default function encodeUserPassword() {
+export default function encodeUserPasswordModule() {
   const useCase = new EncodePasswordUseCase();
   return useCase.execute;
 }
