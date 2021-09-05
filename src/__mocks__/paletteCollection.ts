@@ -1,6 +1,6 @@
 import Palette from '@entities/Palette';
 
-export const paletteCollection = [
+export const paletteCollection = () => [
   new Palette(
     {
       isPublic: true,

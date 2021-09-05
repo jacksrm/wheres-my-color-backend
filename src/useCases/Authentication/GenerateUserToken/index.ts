@@ -1,6 +1,6 @@
-import GenerateUserTokenUseCase from './GenerateUserTokenUseCase';
+import { GenerateUserTokenUseCase } from './GenerateUserTokenUseCase';
 
-export default function generateUserTokenModule() {
+export function generateUserTokenModule() {
   const useCase = new GenerateUserTokenUseCase();
 
   return useCase.execute;

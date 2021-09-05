@@ -1,6 +1,6 @@
 import User from '@entities/User';
 
-export const userCollection = [
+export const userCollection = () => [
   new User(
     {
       email: 'edinaldopereira@meuapp.com',
