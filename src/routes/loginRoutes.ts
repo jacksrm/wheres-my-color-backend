@@ -1,8 +1,9 @@
-import userLogin from '@useCases/Authentication/UserLogin';
 import { Router } from 'express';
+import userLogin from '@useCases/Authentication/UserLogin';
 
 const loginRoutes = Router();
+const { controller } = userLogin();
 
-loginRoutes.post('/', userLogin().controller.handle());
+loginRoutes.post('/', controller());
 
 export default loginRoutes;

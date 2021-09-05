@@ -26,9 +26,15 @@ export default class CreateUserController {
           .status(201)
           .json({ message: 'User created successfully!' });
       } catch (error) {
+        if (error instanceof Error) {
+          return response
+            .status(400)
+            .json({ message: error.message || 'An unexpected error ocurred!' });
+        }
+
         return response
           .status(400)
-          .json({ message: error.message || 'An unexpected error ocurred!' });
+          .json({ message: 'An unexpected error ocurred!' });
       }
     };
   }

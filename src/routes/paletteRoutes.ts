@@ -1,21 +1,22 @@
 import { Router } from 'express';
 import createPalette from '@useCases/Palette/CreatePalette';
 import getSinglePalette from '@useCases/Palette/GetPalette';
-import authenticateUser from '@useCases/Authentication/AuthenticateUser';
+import authenticateUserModule from '@useCases/Authentication/AuthenticateUser';
 import getPublicPalette from '@useCases/Palette/GetPublicPalette';
 import updatePalette from '@useCases/Palette/UpdatePalete';
 
 const paletteRoutes = Router();
+const authenticate = authenticateUserModule();
 
 paletteRoutes.get(
   '/:paletteId',
-  authenticateUser().middleware.handle(),
+  authenticate.middleware,
   getSinglePalette().controller.handle(),
 );
 
 paletteRoutes.put(
   '/update/:paletteId',
-  authenticateUser().middleware.handle(),
+  authenticate.middleware,
   updatePalette().controller.handle(),
 );
 
