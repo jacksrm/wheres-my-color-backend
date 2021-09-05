@@ -1,7 +1,7 @@
 import IUsersRepository from '@repositories/IUsersRepository';
 import { IGetUserRequestDTO } from './GetUserDTO';
 
-export default class GetUserUseCase {
+export class GetUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   async execute(data: IGetUserRequestDTO) {

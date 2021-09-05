@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { IGetUserRequestDTO } from './GetUserDTO';
-import GetUserUseCase from './GetUserUseCase';
+import { GetUserUseCase } from './GetUserUseCase';
 
-export default class GetUserController {
+export class GetUserController {
   constructor(private getUserUseCase: GetUserUseCase) {}
 
   handle() {
