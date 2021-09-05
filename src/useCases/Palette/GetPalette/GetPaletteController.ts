@@ -14,7 +14,9 @@ export default class GetPaletteController {
           request.params as unknown as IGetPaletteRequestDTO,
         );
 
-        if (palette.ownerId !== userId) {
+        const canView = palette.membersId.some((memberId) => userId === memberId);
+
+        if (!canView) {
           return response
             .status(401)
             .json({
@@ -23,7 +25,7 @@ export default class GetPaletteController {
         }
 
         return response.status(200).json({ palette });
-      } catch (error) {
+      } catch (error: any) {
         return response.status(404).json({ message: error.Message });
       }
     };

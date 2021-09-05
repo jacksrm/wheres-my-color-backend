@@ -8,7 +8,6 @@ export default class GetUserPalettesController {
 
   handle() {
     return async (request: IRequestWithUserID, response: Response) => {
-
       const { userId } = request;
       const { ownerId } = request.params as unknown as IGetUserPalettesRequestDTO;
 
