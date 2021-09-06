@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import Color from '@entities/Color';
+import { Color } from '@entities/Color';
 
 const ColorSchema = new Schema<Color>({
   _id: {

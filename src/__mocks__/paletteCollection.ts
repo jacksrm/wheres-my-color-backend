@@ -1,6 +1,23 @@
 import Palette from '@entities/Palette';
 
-export const paletteCollection = [
+export const publicPaletteId = 'palette1111';
+export const privatePaletteId = 'palette3333';
+
+export const createPaletteData = {
+  ownerId: 'user1111',
+  name: 'Banido... Banido... Banido...',
+  isPublic: false,
+};
+
+export const changePaletteData = (
+  {
+    isPublic: false,
+    name: 'Paleta de Edinaldo Pereira',
+    paletteId: 'palette1111',
+  }
+);
+
+export const paletteCollection = () => [
   new Palette(
     {
       isPublic: true,

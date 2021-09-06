@@ -1,9 +1,9 @@
 import express from 'express';
-import createUserModule from '@useCases/User/CreateUser';
-import getPublicUserPalettesModule from '@useCases/User/GetPublicUserPalettes';
-import getUserPalettesModule from '@useCases/User/GetUserPalettes';
-import getUserModule from '@useCases/User/GetUser';
-import authenticateUserModule from '@useCases/Authentication/AuthenticateUser';
+import { createUserModule } from '@useCases/User/CreateUser';
+import { getPublicUserPalettesModule } from '@useCases/User/GetPublicUserPalettes';
+import { getUserPalettesModule } from '@useCases/User/GetUserPalettes';
+import { getUserModule } from '@useCases/User/GetUser';
+import { authenticateUserModule } from '@useCases/Authentication/AuthenticateUser';
 
 const userRoutes = express.Router();
 const createUser = createUserModule();

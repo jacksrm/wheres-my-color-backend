@@ -1,8 +1,8 @@
-import User from '@entities/User';
-import { Model, connection } from 'mongoose';
-import IUsersRepository from '@repositories/IUsersRepository';
+import { User } from '@entities/User';
+import { Model } from 'mongoose';
+import { IUsersRepository } from '@repositories/IUsersRepository';
 
-export default class MongoDBUsersRepository implements IUsersRepository {
+export class MongoDBUsersRepository implements IUsersRepository {
   constructor(private UserModel: Model<User>) {}
 
   async getAllUsers(): Promise<User[]> {

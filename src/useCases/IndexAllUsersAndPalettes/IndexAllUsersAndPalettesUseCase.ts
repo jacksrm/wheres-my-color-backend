@@ -1,6 +1,5 @@
-import User from '@entities/User';
-import IPalettesRepository from '@repositories/IPalettesRepository';
-import IUsersRepository from '@repositories/IUsersRepository';
+import { IPalettesRepository } from '@repositories/IPalettesRepository';
+import { IUsersRepository } from '@repositories/IUsersRepository';
 
 export class IndexAllUsersAndPalettesUseCase {
   constructor(

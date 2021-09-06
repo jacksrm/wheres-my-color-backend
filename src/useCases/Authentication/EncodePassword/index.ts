@@ -1,6 +1,6 @@
-import EncodePasswordUseCase from './EncodePasswordUseCase';
+import { EncodePasswordUseCase } from './EncodePasswordUseCase';
 
-export default function encodeUserPasswordModule() {
+export function encodeUserPasswordModule() {
   const useCase = new EncodePasswordUseCase();
   return useCase.execute;
 }

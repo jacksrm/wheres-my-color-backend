@@ -1,12 +1,12 @@
-import IUsersRepository from '@repositories/IUsersRepository';
-import checkEncodedPasswordModule from '../CheckUserEncodedPassword';
-import generateUserTokenModule from '../GenerateUserToken';
+import { IUsersRepository } from '@repositories/IUsersRepository';
+import { checkUserEncodedPasswordModule } from '../CheckUserEncodedPassword';
+import { generateUserTokenModule } from '../GenerateUserToken';
 import { IUserLoginRequestDTO } from './IUserLoginDTO';
 
 const generateToken = generateUserTokenModule();
-const checkPassword = checkEncodedPasswordModule();
+const checkPassword = checkUserEncodedPasswordModule();
 
-export default class UserLoginUseCase {
+export class UserLoginUseCase {
   constructor(private userRepository: IUsersRepository) {}
 
   async execute(data: IUserLoginRequestDTO) {
@@ -17,7 +17,7 @@ export default class UserLoginUseCase {
     const validPassword = await checkPassword(user, data.password);
 
     if (!validPassword) {
-      throw new Error('Incorrect password');
+      throw new Error('Incorrect password!');
     }
 
     const token = generateToken(user);

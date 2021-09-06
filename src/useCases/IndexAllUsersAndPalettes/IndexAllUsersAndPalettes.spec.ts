@@ -1,10 +1,8 @@
-import { UsersRepository } from '@mocks/UsersRepository';
-import { PalettesRepository } from '@mocks/PalettesRepository';
+import { mockRepos } from '@mocks/index';
 import { IndexAllUsersAndPalettesUseCase } from './IndexAllUsersAndPalettesUseCase';
 
-const usersRepo = new UsersRepository();
-const palettesRepo = new PalettesRepository();
-const useCase = new IndexAllUsersAndPalettesUseCase(usersRepo, palettesRepo);
+const repos = mockRepos();
+const useCase = new IndexAllUsersAndPalettesUseCase(repos.users, repos.palettes);
 
 describe('Testes de IndexAllUsersAndPalettesUseCase', () => {
   test('Deve retornar um array de usuários com suas devidas paletas publicas', async () => {

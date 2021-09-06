@@ -1,6 +1,6 @@
-import Palette from '@entities/Palette';
+import { Palette } from '@entities/Palette';
 
-interface IPalettesRepository {
+export interface IPalettesRepository {
   getAllPublicPalettes(): Promise<Palette[]>;
   getUserPalettes(ownerId: string): Promise<Palette[]>;
   getPublicUserPalettes(ownerId: string): Promise<Palette[]>;
@@ -8,5 +8,3 @@ interface IPalettesRepository {
   updatePalette(palette: Palette): Promise<Palette | null>;
   save(palette: Palette): Promise<Palette>;
 }
-
-export default IPalettesRepository;

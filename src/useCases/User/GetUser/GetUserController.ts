@@ -1,8 +1,9 @@
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { Request, Response } from 'express';
 import { IGetUserRequestDTO } from './GetUserDTO';
-import GetUserUseCase from './GetUserUseCase';
+import { GetUserUseCase } from './GetUserUseCase';
 
-export default class GetUserController {
+export class GetUserController {
   constructor(private getUserUseCase: GetUserUseCase) {}
 
   handle() {
@@ -18,7 +19,7 @@ export default class GetUserController {
           return response.status(404).json({ message: error.message });
         }
 
-        return response.status(400).json({ message: 'Something went wrong!' });
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

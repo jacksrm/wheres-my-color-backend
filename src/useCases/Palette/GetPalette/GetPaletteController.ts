@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { IRequestWithUserID } from '@interfaces/IRequestWithUserID';
 import { IGetPaletteRequestDTO } from './GetPaletteDTO';
-import GetPaletteUseCase from './GetPaletteUseCase';
+import { GetPaletteUseCase } from './GetPaletteUseCase';
 
-export default class GetPaletteController {
+export class GetPaletteController {
   constructor(private getPaletteUseCase: GetPaletteUseCase) {}
 
   handle() {
@@ -25,8 +25,8 @@ export default class GetPaletteController {
         }
 
         return response.status(200).json({ palette });
-      } catch (error: any) {
-        return response.status(404).json({ message: error.Message });
+      } catch (error) {
+        return response.sendStatus(404);
       }
     };
   }

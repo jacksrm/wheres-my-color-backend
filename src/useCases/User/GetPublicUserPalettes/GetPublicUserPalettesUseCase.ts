@@ -1,10 +1,10 @@
-import IPaletteRepository from '@repositories/IPalettesRepository';
-import { IGetUserPalettesRequestDTO } from '../GetUserPalettes/GetUserPalettesDTO';
+import { IPalettesRepository } from '@repositories/IPalettesRepository';
+import { IGetPublicUserPalettesRequestDTO } from './GetPublicUserPalettesDTO';
 
-export default class GetPublicUserPalettesUseCase {
-  constructor(private palettesRepository: IPaletteRepository) {}
+export class GetPublicUserPalettesUseCase {
+  constructor(private palettesRepository: IPalettesRepository) {}
 
-  async execute(data: IGetUserPalettesRequestDTO) {
+  async execute(data: IGetPublicUserPalettesRequestDTO) {
     const palettes = await this.palettesRepository.getPublicUserPalettes(data.ownerId);
     return palettes;
   }

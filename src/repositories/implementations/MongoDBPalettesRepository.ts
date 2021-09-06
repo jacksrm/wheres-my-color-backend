@@ -1,9 +1,8 @@
 import { Model } from 'mongoose';
-import Palette from '@entities/Palette';
-import IPalettesRepository from '@repositories/IPalettesRepository';
-import MongoDBUsersRepository from './MongoDBUsersRepository';
+import { Palette } from '@entities/Palette';
+import { IPalettesRepository } from '@repositories/IPalettesRepository';
 
-export default class MongoDBPalettesRepository implements IPalettesRepository {
+export class MongoDBPalettesRepository implements IPalettesRepository {
   constructor(
     private PaletteModel: Model<Palette>,
   ) {}

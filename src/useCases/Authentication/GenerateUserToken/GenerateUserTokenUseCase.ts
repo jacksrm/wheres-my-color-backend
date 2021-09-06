@@ -1,7 +1,7 @@
-import User from '@entities/User';
+import { User } from '@entities/User';
 import { sign } from 'jsonwebtoken';
 
-export default class GenerateUserTokenUseCase {
+export class GenerateUserTokenUseCase {
   execute(user: User) {
     const { SECRET_KEY } = process.env;
 

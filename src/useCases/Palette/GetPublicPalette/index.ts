@@ -1,11 +1,11 @@
-import MongoDBPalettesRepository from '@repositories/implementations/MongoDBPalettesRepository';
-import { PaletteModel } from '@repositories/schemas/PaletteSchema';
-import GetPublicPaletteController from './GetPublicPaletteController';
-import GetPublicPaletteUseCase from './GetPublicPaletteUseCase';
+import { repositoriesModule } from '@repositories/index';
+import { GetPublicPaletteController } from './GetPublicPaletteController';
+import { GetPublicPaletteUseCase } from './GetPublicPaletteUseCase';
 
-export default function getPublicPaletteModule() {
-  const paletteRepository = new MongoDBPalettesRepository(PaletteModel);
-  const useCase = new GetPublicPaletteUseCase(paletteRepository);
+const repos = repositoriesModule();
+
+export function getPublicPaletteModule() {
+  const useCase = new GetPublicPaletteUseCase(repos.palettes);
   const controller = new GetPublicPaletteController(useCase);
 
   return {

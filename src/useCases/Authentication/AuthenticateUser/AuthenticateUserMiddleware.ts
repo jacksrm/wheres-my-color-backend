@@ -1,12 +1,10 @@
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { NextFunction, Response } from 'express';
 import { IRequestWithUserID } from 'interfaces/IRequestWithUserID';
-import {
-  IAuthenticateUserJWT,
-  IAuthenticateUserRequestDTO,
-} from './AuthenticateUserDTO';
-import AuthenticateUserUseCase from './AuthenticateUserUseCase';
+import { IAuthenticateUserRequestDTO } from './AuthenticateUserDTO';
+import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
-export default class AuthenticateUserMiddleware {
+export class AuthenticateUserMiddleware {
   constructor(private authenticateUserUseCase: AuthenticateUserUseCase) {}
 
   handle() {
@@ -23,7 +21,11 @@ export default class AuthenticateUserMiddleware {
         request.userId = decodedData.userId;
         return next();
       } catch (error) {
-        return response.status(401).json({ message: error.message });
+        if (error instanceof Error) {
+          return response.status(401).json({ message: error.message });
+        }
+
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

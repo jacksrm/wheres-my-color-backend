@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import Color from './Color';
+import { Color } from './Color';
 
 interface PaletteProps {
   ownerId: string
@@ -10,7 +10,7 @@ interface PaletteProps {
   authorizeChange?: string[];
 }
 
-export default class Palette {
+export class Palette {
   public readonly _id: string;
 
   public readonly ownerId: string;

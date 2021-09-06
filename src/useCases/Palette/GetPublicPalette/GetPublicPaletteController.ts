@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { IGetPaletteRequestDTO } from '../GetPalette/GetPaletteDTO';
-import GetPublicPaletteUseCase from './GetPublicPaletteUseCase';
+import { GetPublicPaletteUseCase } from './GetPublicPaletteUseCase';
 
-export default class GetPublicPaletteController {
+export class GetPublicPaletteController {
   constructor(private getPublicPaletteUseCase: GetPublicPaletteUseCase) {}
 
   handle() {

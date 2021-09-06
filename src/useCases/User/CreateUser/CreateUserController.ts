@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import CreateUserUseCase from './CreateUserUseCase';
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
+import { CreateUserUseCase } from './CreateUserUseCase';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 
-export default class CreateUserController {
+export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   handle() {
@@ -27,14 +28,10 @@ export default class CreateUserController {
           .json({ message: 'User created successfully!' });
       } catch (error) {
         if (error instanceof Error) {
-          return response
-            .status(400)
-            .json({ message: error.message || 'An unexpected error ocurred!' });
+          return response.status(400).json({ message: error.message });
         }
 
-        return response
-          .status(400)
-          .json({ message: 'An unexpected error ocurred!' });
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

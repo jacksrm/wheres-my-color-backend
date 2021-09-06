@@ -1,8 +1,8 @@
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { Request, Response } from 'express';
-import { IUserLoginRequestDTO } from './IUserLoginDTO';
-import UserLoginUseCase from './UserLoginUserCase';
+import { UserLoginUseCase } from './UserLoginUserCase';
 
-export default class UserLoginController {
+export class UserLoginController {
   constructor(private userLoginUseCase: UserLoginUseCase) {}
 
   handle() {
@@ -11,7 +11,10 @@ export default class UserLoginController {
         const token = await this.userLoginUseCase.execute(request.body);
         return response.status(200).json({ token });
       } catch (error) {
-        return response.status(400).json({ message: error.message });
+        if (error instanceof Error) {
+          return response.status(400).json({ message: error.message });
+        }
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

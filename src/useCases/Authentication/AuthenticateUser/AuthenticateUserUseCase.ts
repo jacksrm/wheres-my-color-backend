@@ -1,7 +1,7 @@
 import { verify } from 'jsonwebtoken';
 import { IAuthenticateUserJWT, IAuthenticateUserRequestDTO } from './AuthenticateUserDTO';
 
-export default class AuthenticateUserUseCase {
+export class AuthenticateUserUseCase {
   execute(data: IAuthenticateUserRequestDTO) {
     const { authorization } = data;
     const { SECRET_KEY } = process.env;
@@ -10,11 +10,11 @@ export default class AuthenticateUserUseCase {
 
     const parts = authorization.split(' ');
 
-    if (parts.length !== 2) throw new Error('Invalid token');
+    if (parts.length !== 2) throw new Error('Invalid token!');
 
     const [bearer, token] = parts;
 
-    if (!(/^Bearer$/i).test(bearer)) throw new Error('Token malformed!');
+    if (!(/^bearer$/i).test(bearer)) throw new Error('Token incorrectly formatted!');
 
     return verify(token, SECRET_KEY!) as IAuthenticateUserJWT;
   }

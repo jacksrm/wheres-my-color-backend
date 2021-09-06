@@ -1,25 +1,27 @@
 import User from '@entities/User';
 import IUsersRepository from '@repositories/IUsersRepository';
+import { encodeUserPasswordModule } from '@useCases/Authentication/EncodePassword';
 import { userCollection } from './userCollection';
 
+const encode = encodeUserPasswordModule();
 export class UsersRepository implements IUsersRepository {
   getAllUsers(): Promise<User[]> {
-    return new Promise((resolve) => resolve(userCollection));
+    return new Promise((resolve) => resolve(userCollection()));
   }
 
   async findByEmail(
     email: string,
     withPassword?: boolean,
   ): Promise<User | null> {
-    return new Promise((resolve) => {
-      const match = userCollection.find((user) => user.email === email);
+    const match = userCollection().find((user) => user.email === email);
+    if (!match) return null;
 
-      if (withPassword) resolve(match ?? null);
-      else if (match) {
-        const { password, ...newMatch } = match;
-        resolve(newMatch as User);
-      } else resolve(null);
-    });
+    await encode(match);
+
+    if (withPassword) return match;
+
+    const { password, ...newMatch } = match;
+    return newMatch as User;
   }
 
   async findByUsername(
@@ -27,7 +29,7 @@ export class UsersRepository implements IUsersRepository {
     withPassword?: boolean,
   ): Promise<User | null> {
     return new Promise((resolve) => {
-      const match = userCollection.find((user) => user.username === username);
+      const match = userCollection().find((user) => user.username === username);
 
       if (withPassword) resolve(match ?? null);
       else if (match) {
@@ -39,7 +41,7 @@ export class UsersRepository implements IUsersRepository {
 
   async findById(_id: string, withPassword?: boolean): Promise<User | null> {
     return new Promise((resolve) => {
-      const match = userCollection.find((user) => user._id === _id);
+      const match = userCollection().find((user) => user._id === _id);
 
       if (withPassword) resolve(match ?? null);
       else if (match) {
@@ -51,7 +53,7 @@ export class UsersRepository implements IUsersRepository {
 
   async update(userToUpdate: User): Promise<User> {
     return new Promise((resolve, reject) => {
-      const match = userCollection.find((user) => user._id === userToUpdate._id);
+      const match = userCollection().find((user) => user._id === userToUpdate._id);
       if (match) resolve(userToUpdate);
       else reject();
     });

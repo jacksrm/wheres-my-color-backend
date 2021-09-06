@@ -1,13 +1,14 @@
 import { Response } from 'express';
 import { IRequestWithUserID } from '@interfaces/IRequestWithUserID';
-import UpdatePaletteUseCase from './UpdatePaletteUseCase';
+import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
+import { UpdatePaletteUseCase } from './UpdatePaletteUseCase';
 import {
   IUpdatePaletteRequestBodyDTO,
   IUpdatePaletteRequestParamsDTO,
 } from './UpdatePaletteDTO';
-import UpdatePaletteError from './UpdatePaletteError';
+import { UpdatePaletteError } from './UpdatePaletteError';
 
-export default class UpdatePaletteController {
+export class UpdatePaletteController {
   constructor(private updatePaletteUseCase: UpdatePaletteUseCase) {}
 
   handle() {
@@ -40,14 +41,10 @@ export default class UpdatePaletteController {
         return response.status(200).json({ message: 'Updated successfully!' });
       } catch (error) {
         if (error instanceof UpdatePaletteError) {
-          return response
-            .status(error.statusCode)
-            .json({ message: error.message });
+          return response.status(error.statusCode).json({ message: error.message });
         }
 
-        return response
-          .status(400)
-          .json({ message: 'Unexpected error processing your request!' });
+        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
       }
     };
   }

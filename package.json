@@ -50,5 +50,10 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest --watch"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/setupTests.ts"
+    ] 
   }
 }

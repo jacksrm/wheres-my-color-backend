@@ -1,7 +1,7 @@
-import AuthenticateUserMiddleware from './AuthenticateUserMiddleware';
-import AuthenticateUserUseCase from './AuthenticateUserUseCase';
+import { AuthenticateUserMiddleware } from './AuthenticateUserMiddleware';
+import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
 
-export default function authenticateUserModule() {
+export function authenticateUserModule() {
   const useCase = new AuthenticateUserUseCase();
   const middleware = new AuthenticateUserMiddleware(useCase);
 
