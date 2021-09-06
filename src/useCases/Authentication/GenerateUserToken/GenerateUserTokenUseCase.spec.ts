@@ -7,7 +7,7 @@ import { generateUserTokenModule } from '.';
 
 const generate = generateUserTokenModule();
 
-describe.skip('Testes de GenerateUserToken.', () => {
+describe('Testes de GenerateUserToken.', () => {
   test('Testa se o token do usuário é gerado.', () => {
     const { SECRET_KEY } = process.env;
 
