@@ -2,10 +2,10 @@ import 'dotenv/config';
 import { connect, connection } from 'mongoose';
 import app from './app';
 
-const { PORT, API_URL } = process.env;
+const { $PORT, API_URL } = process.env;
 
-app.listen(3333, () => {
-  console.info(`App Running on: ${API_URL}:${PORT}/`);
+app.listen($PORT, () => {
+  console.info(`App Running on: ${API_URL}:${$PORT}/`);
   connect(process.env.DATABASE_URL || '', {
     useNewUrlParser: true,
     useFindAndModify: false,
