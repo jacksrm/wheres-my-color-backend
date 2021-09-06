@@ -1,6 +1,7 @@
 import { model, Schema } from 'mongoose';
 import { Color } from '@entities/Color';
 
+// TODO: ALterar value para ser objeto com hex e rgb
 const ColorSchema = new Schema<Color>({
   _id: {
     type: String,

@@ -1,4 +1,4 @@
-import Palette from '@entities/Palette';
+import { Palette } from '@entities/Palette';
 
 export const publicPaletteId = 'palette1111';
 export const privatePaletteId = 'palette3333';
