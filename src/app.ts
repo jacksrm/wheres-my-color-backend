@@ -11,9 +11,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(getAllRoutes);
-app.use('/user', userRoutes);
-app.use('/palette', paletteRoutes);
-app.use('/login', loginRoutes);
+app.use('/v1', getAllRoutes);
+app.use('/v1/user', userRoutes);
+app.use('/v1/palette', paletteRoutes);
+app.use('/v1/login', loginRoutes);
 
 export default app;
