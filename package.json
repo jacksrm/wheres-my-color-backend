@@ -45,8 +45,8 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start": "yarn build && nodemon dist/server.js",
-    "build": "babel --extensions '.ts'  src --out-dir dist --no-copy-ignored && tsc -p .",
+    "start": "node dist/server.js",
+    "build": "babel --extensions \".ts, .js\"  src --out-dir dist --no-copy-ignored",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest --watch"
