@@ -5,7 +5,7 @@ import { IGetPaletteRequestDTO } from './GetPaletteDTO';
 export class GetPaletteUseCase {
   constructor(private palettesRepository: IPalettesRepository) {}
 
-  async execute(data: IGetPaletteRequestDTO): Promise<Palette> {
+  execute = async (data: IGetPaletteRequestDTO): Promise<Palette> => {
     const palette = await this.palettesRepository.getPaletteById(
       data.paletteId,
     );
