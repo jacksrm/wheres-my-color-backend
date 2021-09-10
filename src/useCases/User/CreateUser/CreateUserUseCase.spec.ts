@@ -4,14 +4,15 @@ import {
   conflictEmailUserData,
   conflictUsernameUserData,
 } from '@mocks/userCollection';
+import { createUserModule } from '.';
 import { CreateUserUseCase } from './CreateUserUseCase';
 
 const repos = mockRepos();
+const createUser = createUserModule(repos);
 
 describe('Testes de CreateUserUseCase.', () => {
   test('testa se ao passar os dados do usuário, um novo registro é criado', async () => {
-    const useCase = new CreateUserUseCase(repos.users);
-    const newUser = await useCase.execute(newUserData);
+    const newUser = await createUser.useCase(newUserData);
 
     expect(newUser).toBeDefined();
     expect(newUser._id).toBeDefined();
