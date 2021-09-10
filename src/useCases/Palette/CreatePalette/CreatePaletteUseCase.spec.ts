@@ -1,13 +1,13 @@
 import { mockRepos } from '@mocks/index';
 import { createPaletteData } from '@mocks/paletteCollection';
-import { CreatePaletteUseCase } from './CreatePaletteUseCase';
+import { createPaletteModule } from '.';
 
 const repos = mockRepos();
+const createPalette = createPaletteModule(repos);
 
 describe('Testes de CreatePalette.', () => {
   test('Testa se ao passar os dados da paleta, a paleta é criada', async () => {
-    const useCase = new CreatePaletteUseCase(repos.palettes);
-    const newPalette = await useCase.execute(createPaletteData);
+    const newPalette = await createPalette.useCase(createPaletteData);
 
     expect(newPalette).toBeDefined();
     expect(newPalette._id).toBeDefined();
