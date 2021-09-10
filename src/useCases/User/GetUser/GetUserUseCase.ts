@@ -4,11 +4,11 @@ import { IGetUserRequestDTO } from './GetUserDTO';
 export class GetUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  async execute(data: IGetUserRequestDTO) {
-    const user = await this.usersRepository.findById(data.userId);
+   execute = async (data: IGetUserRequestDTO) => {
+     const user = await this.usersRepository.findById(data.userId);
 
-    if (!user) throw new Error('User not found!');
+     if (!user) throw new Error('User not found!');
 
-    return user;
-  }
+     return user;
+   }
 }
