@@ -1,15 +1,14 @@
 import { mockRepos } from '@mocks/index';
 import { paletteCollection } from '@mocks/paletteCollection';
 import { userCollection } from '@mocks/userCollection';
-import { GetUserPalettesUseCase } from './GetUserPalettesUseCase';
+import { getUserPalettesModule } from '.';
 
 const repos = mockRepos();
-
+const getUser = getUserPalettesModule(repos);
 describe('Testes de GetUserPalette', () => {
   test('Testa se ao passar um id as paletas do usuário são retornadas', async () => {
-    const useCase = new GetUserPalettesUseCase(repos.palettes);
     const idToFind = userCollection()[0]._id;
-    const matched = await useCase.execute({ ownerId: idToFind });
+    const matched = await getUser.useCase({ ownerId: idToFind });
 
     matched.forEach((paletteFound) => {
       const check = paletteCollection().some(
