@@ -2,7 +2,7 @@ import { User } from '@entities/User';
 import { sign } from 'jsonwebtoken';
 
 export class GenerateUserTokenUseCase {
-  execute(user: User) {
+  execute = (user: User) => {
     const { SECRET_KEY } = process.env;
 
     const token = sign(
