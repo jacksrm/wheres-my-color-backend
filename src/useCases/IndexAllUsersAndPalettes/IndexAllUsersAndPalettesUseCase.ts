@@ -7,7 +7,7 @@ export class IndexAllUsersAndPalettesUseCase {
     private paletteRepository: IPalettesRepository,
   ) {}
 
-  async execute() {
+  execute = async () => {
     const users = await this.usersRepository.getAllUsers();
     const palettes = await this.paletteRepository.getAllPublicPalettes();
     const usersWithPalettes = users.map(({ profilePicture, _id, username }) => {
