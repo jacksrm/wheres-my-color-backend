@@ -7,6 +7,6 @@ export function authenticateUserModule() {
 
   return {
     useCase: useCase.execute,
-    middleware: middleware.handle(),
+    middleware: middleware.handle,
   };
 }
