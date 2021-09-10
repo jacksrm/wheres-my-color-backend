@@ -9,7 +9,7 @@ const checkPassword = checkUserEncodedPasswordModule();
 export class UserLoginUseCase {
   constructor(private userRepository: IUsersRepository) {}
 
-  async execute(data: IUserLoginRequestDTO) {
+  execute= async (data: IUserLoginRequestDTO) => {
     const user = await this.userRepository.findByEmail(data.email, true);
 
     if (!user) throw new Error('Theres no user with this email!');
