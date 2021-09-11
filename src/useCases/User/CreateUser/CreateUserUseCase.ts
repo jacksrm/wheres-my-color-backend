@@ -8,7 +8,7 @@ const encodePassword = encodeUserPasswordModule();
 export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  async execute(data: ICreateUserRequestDTO) {
+  execute = async (data: ICreateUserRequestDTO) => {
     const emailAlreadyExists = await this.usersRepository.findByEmail(data.email);
     const usernameAlreadyExists = await this.usersRepository.findByUsername(data.username);
 

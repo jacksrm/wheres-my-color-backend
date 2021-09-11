@@ -1,19 +1,20 @@
 import { repositoriesModule } from '@repositories/index';
+import { IRepositoryFactory } from '@repositories/IRepositoryFactory';
 import { IndexAllUsersAndPalettesController } from './IndexAllUsersAndPalettesController';
 import { IndexAllUsersAndPalettesUseCase } from './IndexAllUsersAndPalettesUseCase';
 
-const repositories = repositoriesModule();
+const repos = repositoriesModule();
 
-export function indexAllUsersAndPalettesModule() {
+export function indexAllUsersAndPalettesModule(repository: IRepositoryFactory = repos) {
   const useCase = new IndexAllUsersAndPalettesUseCase(
-    repositories.users,
-    repositories.palettes,
+    repository.users,
+    repository.palettes,
   );
 
   const controller = new IndexAllUsersAndPalettesController(useCase);
 
   return {
     useCase: useCase.execute,
-    controller: controller.handle(),
+    controller: controller.handle,
   };
 }

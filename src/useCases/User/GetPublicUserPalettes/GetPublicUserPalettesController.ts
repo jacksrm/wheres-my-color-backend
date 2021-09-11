@@ -6,17 +6,15 @@ import { GetPublicUserPalettesUseCase } from './GetPublicUserPalettesUseCase';
 export class GetPublicUserPalettesController {
   constructor(private getPublicUserPalettesUseCase: GetPublicUserPalettesUseCase) {}
 
-  handle() {
-    return async (request: Request, response: Response) => {
-      const { ownerId } = request.params as unknown as IGetUserPalettesRequestDTO;
+  handle = async (request: Request, response: Response) => {
+    const { ownerId } = request.params as unknown as IGetUserPalettesRequestDTO;
 
-      try {
-        const palettes = await this.getPublicUserPalettesUseCase.execute({ ownerId });
+    try {
+      const palettes = await this.getPublicUserPalettesUseCase.execute({ ownerId });
 
-        return response.status(200).json({ palettes });
-      } catch (error) {
-        return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
-      }
-    };
-  }
+      return response.status(200).json({ palettes });
+    } catch (error) {
+      return response.status(400).json({ message: DEFAULT_ERROR_MESSAGE });
+    }
+  };
 }

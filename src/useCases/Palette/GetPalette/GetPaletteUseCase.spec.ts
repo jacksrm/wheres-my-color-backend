@@ -1,21 +1,19 @@
 import { mockRepos } from '@mocks/index';
 import { paletteCollection } from '@mocks/paletteCollection';
-import { GetPaletteUseCase } from './GetPaletteUseCase';
+import { getPaletteModule } from '.';
 
 const repos = mockRepos();
+const getPalette = getPaletteModule(repos);
 
 describe('Testes de GetSinglePalette', () => {
   test('Testa se ao passar o id da paleta, a paleta é retornada', async () => {
-    const useCase = new GetPaletteUseCase(repos.palettes);
-    const palette = await useCase.execute({ paletteId: paletteCollection()[0]._id });
+    const palette = await getPalette.useCase({ paletteId: paletteCollection()[0]._id });
 
     expect(palette).toBeDefined();
   });
 
   test('Testa se ao passar o id inválido da paleta, um erro é lançado coma mensagem "This palette doesn\'t exists!"', async () => {
-    const useCase = new GetPaletteUseCase(repos.palettes);
-
-    await expect(useCase.execute({ paletteId: 'Um id qualquer inválido' }))
+    await expect(getPalette.useCase({ paletteId: 'Um id qualquer inválido' }))
       .rejects
       .toThrowError(new Error("This palette doesn't exists!"));
   });

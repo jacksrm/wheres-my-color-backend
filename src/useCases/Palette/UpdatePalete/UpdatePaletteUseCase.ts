@@ -9,10 +9,10 @@ import {
 export class UpdatePaletteUseCase {
   constructor(private palettesRepository: IPalettesRepository) {}
 
-  async execute(
+  execute = async (
     data: IUpdatePaletteRequestBodyDTO & IUpdatePaletteRequestParamsDTO,
     userId: string,
-  ) {
+  ) => {
     const matchPalette = await this.palettesRepository.getPaletteById(
       data.paletteId,
     );

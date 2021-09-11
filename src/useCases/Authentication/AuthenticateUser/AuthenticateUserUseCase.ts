@@ -2,7 +2,7 @@ import { verify } from 'jsonwebtoken';
 import { IAuthenticateUserJWT, IAuthenticateUserRequestDTO } from './AuthenticateUserDTO';
 
 export class AuthenticateUserUseCase {
-  execute(data: IAuthenticateUserRequestDTO) {
+  execute = (data: IAuthenticateUserRequestDTO) => {
     const { authorization } = data;
     const { SECRET_KEY } = process.env;
 
