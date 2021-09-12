@@ -21,6 +21,13 @@ export const newUserData = {
   password: '1234567890',
 };
 
+export const updateUserData = {
+  username: 'JackLindissimo',
+  email: 'jacsonatualizado@meuapp.com',
+  password: '0987654321',
+  profilePicture: 'minhanovaimagem.com',
+};
+
 export const conflictEmailUserData = {
   username: 'JackSR',
   email: 'jacson@meuapp.com',
