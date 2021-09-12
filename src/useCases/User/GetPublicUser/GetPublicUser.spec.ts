@@ -10,7 +10,7 @@ const getUser = getPublicUserModule(repos);
 const userToFind = userCollection()[0];
 
 describe('Testes Unitários de GetUser - Public.', () => {
-  test('Testa se ao passar o id do usuário, seus dados são retornados, exceto password', async () => {
+  test('Testa se ao passar o id do usuário, seus dados públicos são retornados', async () => {
     const match = await getUser.useCase({ userId: userToFind._id });
     const { password, email, ...toCheck } = userToFind;
     expect(match).toEqual(toCheck);
