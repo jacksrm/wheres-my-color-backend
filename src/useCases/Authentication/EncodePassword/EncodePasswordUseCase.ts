@@ -8,6 +8,6 @@ export class EncodePasswordUseCase {
     const hashPass = await hash(encodeUser.password, salt);
 
     encodeUser.password = hashPass;
-    return user;
+    return encodeUser;
   }
 }
