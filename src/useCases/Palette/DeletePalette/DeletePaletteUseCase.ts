@@ -10,7 +10,7 @@ export class DeletePaletteUseCase {
 
     if (!match) {
       throw new DeletePaletteError(
-        400,
+        404,
         "Couldn't find a palette with matching ID!",
       );
     }
