@@ -3,6 +3,10 @@ import { IPalettesRepository } from '@repositories/IPalettesRepository';
 import { paletteCollection } from './paletteCollection';
 
 export class PalettesRepository implements IPalettesRepository {
+  deleteAllUserPalettes = (ownerId: string): Promise<void> => (
+    new Promise((resolve) => resolve())
+  );
+
   deletePalette = (
     _id: string,
   ): Promise<{ ok?: number, n?: number } & { deletedCount?: number }> => (

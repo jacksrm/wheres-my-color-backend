@@ -4,17 +4,29 @@ import { getPublicUserPalettesModule } from '@useCases/User/GetPublicUserPalette
 import { getUserPalettesModule } from '@useCases/User/GetUserPalettes';
 import { getUserModule } from '@useCases/User/GetUser';
 import { authenticateUserModule } from '@useCases/Authentication/AuthenticateUser';
+import { deleteUserModule } from '@useCases/User/DeleteUser';
+import { updateUserModule } from '@useCases/User/UpdateUser';
+import { getPublicUserModule } from '@useCases/User/GetPublicUser';
 
 const userRoutes = express.Router();
-const createUser = createUserModule();
+
 const getPublicPalettes = getPublicUserPalettesModule();
-const authenticate = authenticateUserModule();
-const getUser = getUserModule();
 const getUserPalettes = getUserPalettesModule();
+const getPublicUser = getPublicUserModule();
+const authenticate = authenticateUserModule();
+const createUser = createUserModule();
+const deleteUser = deleteUserModule();
+const updateUser = updateUserModule();
+const getUser = getUserModule();
 
 userRoutes.post('/create', createUser.controller);
-userRoutes.get('/:ownerId', authenticate.middleware, getUserPalettes.controller);
-userRoutes.get('/public/:ownerId', getPublicPalettes.controller);
-userRoutes.get('/profile/:userId', getUser.controller);
+userRoutes.get('/palettes/public/:ownerId', getPublicPalettes.controller);
+userRoutes.get('/profile/public/:userId', getPublicUser.controller);
+
+userRoutes.get('/palettes', authenticate.middleware, getUserPalettes.controller);
+userRoutes.route('/profile')
+  .get(authenticate.middleware, getUser.controller)
+  .put(authenticate.middleware, updateUser.controller)
+  .delete(authenticate.middleware, deleteUser.controller);
 
 export default userRoutes;

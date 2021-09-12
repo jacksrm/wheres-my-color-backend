@@ -1,6 +1,9 @@
+import 'dotenv/config';
+import supertest from 'supertest';
 import { User } from '@entities/User';
 import { mockRepos } from '@mocks/index';
 import { conflictEmailUserData, conflictUsernameUserData, updateUserData, userCollection } from '@mocks/userCollection';
+import { app } from '../../../app';
 import { updateUserModule } from '.';
 
 const INVALID_ID_ERROR = new Error("There's a problema with your request!");
@@ -43,5 +46,67 @@ describe('Testes unitários de UpdateUser', () => {
     }))
       .rejects
       .toThrow(USERNAME_ALREADY_EXISTS_ERROR);
+  });
+});
+
+const createUserData = {
+  username: 'JackSRSupertest',
+  email: 'jacksupertest@meuapp.com',
+  password: '1234567890',
+};
+
+const updateUserData2 = {
+  username: 'JackSRSupertestUpdated',
+  email: 'jacksupertestupdated@meuapp.com',
+  password: '0987654321',
+};
+
+const loginUserData = {
+  email: 'jacksupertest@meuapp.com',
+  password: '1234567890',
+};
+
+jest.setTimeout(30000);
+
+let token: string;
+
+describe('Testes de Integração de UpdateUser', () => {
+  beforeEach(async () => {
+    await supertest(app).post('/v1/user/create').send(createUserData);
+
+    const response = await supertest(app)
+      .post('/v1/login')
+      .set('Content-Type', 'application/json')
+      .send({
+        email: loginUserData.email,
+        password: loginUserData.password,
+      });
+
+    token = response.body.token;
+  });
+
+  afterEach(async () => {
+    await supertest(app)
+      .delete('/v1/user/profile/')
+      .auth(token, { type: 'bearer' });
+  });
+
+  test('Deve atualizar o usuário corretamente e retornar código 200 com a mensagem "User updated successfully!"', async () => {
+    const response = await supertest(app)
+      .put('/v1/user/profile')
+      .auth(token, { type: 'bearer' })
+      .send(updateUserData2);
+
+    const { body: { user } } = await supertest(app)
+      .get('/v1/user/profile')
+      .auth(token, { type: 'bearer' });
+
+    const userToCompare = user;
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.message).toBe('User updated successfully!');
+    expect(userToCompare.email).toBe(updateUserData2.email);
+    expect(userToCompare.username).toBe(updateUserData2.username);
   });
 });

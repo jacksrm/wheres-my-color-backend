@@ -9,9 +9,8 @@ export class DeleteUserController {
 
   handle = async (request: IRequestWithUserID, response: Response) => {
     const { userId } = request;
-    const { userId: idToRemove } = request.params;
 
-    if (!userId || userId !== idToRemove) {
+    if (!userId) {
       return response.status(400).json({ message: 'Unauthorized!' });
     }
 
