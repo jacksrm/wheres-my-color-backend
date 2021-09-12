@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { IRequestWithUserID } from '@interfaces/IRequestWithUserID';
 import { DEFAULT_ERROR_MESSAGE } from '@utils/default';
 import { DeletePaletteUseCase } from './DeletePaletteUseCase';
-import { IDeletePaletteRequestDTO } from './DeletePaletteDTO';
 import { DeletePaletteError } from './DeletePaletteError';
 
 export class DeletePaletteController {

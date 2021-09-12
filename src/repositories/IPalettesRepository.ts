@@ -9,6 +9,7 @@ export interface IPalettesRepository {
       deletedCount?: number,
     }
   >;
+  deleteAllUserPalettes(ownerId: string): Promise<void>;
   getAllPublicPalettes(): Promise<Palette[]>;
   getUserPalettes(ownerId: string): Promise<Palette[]>;
   getPublicUserPalettes(ownerId: string): Promise<Palette[]>;

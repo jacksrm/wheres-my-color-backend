@@ -14,14 +14,12 @@ const getPublic = getPublicPaletteModule();
 const update = updatePaletteModule();
 const create = createPaletteModule();
 
-paletteRoutes.get('/:paletteId', authenticate.middleware, getPalette.controller);
-
-paletteRoutes.delete('/:paletteId', authenticate.middleware, deletePalette.controller);
-
-paletteRoutes.put('/update/:paletteId', authenticate.middleware, update.controller);
-
-paletteRoutes.get('/public/:paletteId', getPublic.controller);
+paletteRoutes.route('/:paletteId')
+  .get(authenticate.middleware, getPalette.controller)
+  .delete(authenticate.middleware, deletePalette.controller)
+  .put(authenticate.middleware, update.controller);
 
 paletteRoutes.post('/create', authenticate.middleware, create.controller);
+paletteRoutes.get('/public/:paletteId', getPublic.controller);
 
 export default paletteRoutes;

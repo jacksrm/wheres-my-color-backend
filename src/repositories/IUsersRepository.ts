@@ -1,6 +1,7 @@
 import { User } from '@entities/User';
 
 export interface IUsersRepository {
+  deleteUser(userId: string): Promise<void>;
   findByEmail(email: string, withPassword?: boolean): Promise<User | null>;
   findByUsername(username: string, withPassword?: boolean): Promise<User | null>;
   findById(id: string, withPassword?: boolean): Promise<User | null>;

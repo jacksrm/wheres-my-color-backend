@@ -5,6 +5,8 @@ import { userCollection } from './userCollection';
 
 const encode = encodeUserPasswordModule();
 export class UsersRepository implements IUsersRepository {
+  deleteUser = (userId: string): Promise<void> => new Promise((resolve) => resolve())
+
   getAllUsers(): Promise<User[]> {
     return new Promise((resolve) => resolve(userCollection()));
   }
