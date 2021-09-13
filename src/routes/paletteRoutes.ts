@@ -22,4 +22,4 @@ paletteRoutes.route('/:paletteId')
 paletteRoutes.post('/create', authenticate.middleware, create.controller);
 paletteRoutes.get('/public/:paletteId', getPublic.controller);
 
-export default paletteRoutes;
+export { paletteRoutes };

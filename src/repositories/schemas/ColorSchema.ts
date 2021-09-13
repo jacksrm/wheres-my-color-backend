@@ -8,8 +8,17 @@ const ColorSchema = new Schema<Color>(
       type: String,
       require: true,
     },
-    value: {
-      type: String,
+    values: {
+      type: {
+        hex: {
+          type: String,
+          require: true,
+        },
+        rgb: {
+          type: String,
+          require: true,
+        },
+      },
       require: true,
     },
     title: String,
