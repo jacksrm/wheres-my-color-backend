@@ -3,6 +3,7 @@ import supertest from 'supertest';
 import { User } from '@entities/User';
 import { mockRepos } from '@mocks/index';
 import { conflictEmailUserData, conflictUsernameUserData, updateUserData, userCollection } from '@mocks/userCollection';
+import { connection } from '@repositories/connection';
 import { app } from '../../../app';
 import { updateUserModule } from '.';
 
@@ -71,6 +72,16 @@ jest.setTimeout(30000);
 let token: string;
 
 describe('Testes de Integração de UpdateUser', () => {
+  const dbConnection = connection();
+
+  beforeAll(async () => {
+    await dbConnection.start();
+  });
+
+  afterAll(async () => {
+    await dbConnection.close();
+  });
+
   beforeEach(async () => {
     await supertest(app).post('/v1/user/create').send(createUserData);
 

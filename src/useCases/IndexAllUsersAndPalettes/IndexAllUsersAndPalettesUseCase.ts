@@ -1,4 +1,3 @@
-import { User } from '@entities/User';
 import { IPalettesRepository } from '@repositories/IPalettesRepository';
 import { IUsersRepository } from '@repositories/IUsersRepository';
 
@@ -18,7 +17,7 @@ export class IndexAllUsersAndPalettesUseCase {
         profilePicture,
         createdAt,
         updatedAt,
-      } = new User(userData, userData._id);
+      } = userData;
 
       const userPalettes = palettes.filter(
         (palette) => palette.ownerId === _id,

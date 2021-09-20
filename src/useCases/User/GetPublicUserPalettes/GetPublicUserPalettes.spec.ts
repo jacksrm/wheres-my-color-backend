@@ -3,6 +3,7 @@ import supertest from 'supertest';
 import { mockRepos } from '@mocks/index';
 import { paletteCollection } from '@mocks/paletteCollection';
 import { userCollection } from '@mocks/userCollection';
+import { connection } from '@repositories/connection';
 import { app } from '../../../app';
 import { getPublicUserPalettesModule } from '.';
 
@@ -49,6 +50,16 @@ let token: string;
 let ownerId: string;
 
 describe('Testes de Integração de GetUserPalettes - Public', () => {
+  const dbConnection = connection();
+
+  beforeAll(async () => {
+    await dbConnection.start();
+  });
+
+  afterAll(async () => {
+    await dbConnection.close();
+  });
+
   beforeEach(async () => {
     await supertest(app).post('/v1/user/create').send(createUserData);
 

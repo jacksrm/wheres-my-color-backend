@@ -6,6 +6,7 @@ import {
   conflictEmailUserData,
   conflictUsernameUserData,
 } from '@mocks/userCollection';
+import { connection } from '@repositories/connection';
 import { app } from '../../../app';
 import { createUserModule } from '.';
 
@@ -49,6 +50,16 @@ jest.setTimeout(30000);
 let token: string;
 
 describe('Testes de Integração de GetUser - Public', () => {
+  const dbConnection = connection();
+
+  beforeAll(async () => {
+    await dbConnection.start();
+  });
+
+  afterAll(async () => {
+    await dbConnection.close();
+  });
+
   afterEach(async () => {
     const response = await supertest(app)
       .post('/v1/login')

@@ -1,14 +1,7 @@
 import { Palette } from '@entities/Palette';
 
 export interface IPalettesRepository {
-  deletePalette(_id: string): Promise<
-    {
-      ok?: number,
-      n?: number,
-    } & {
-      deletedCount?: number,
-    }
-  >;
+  deletePalette(_id: string): Promise<{ ok?: boolean }>;
   deleteAllUserPalettes(ownerId: string): Promise<void>;
   getAllPublicPalettes(): Promise<Palette[]>;
   getUserPalettes(ownerId: string): Promise<Palette[]>;

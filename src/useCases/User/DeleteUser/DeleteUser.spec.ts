@@ -4,6 +4,7 @@ import supertest from 'supertest';
 import { mockRepos } from '@mocks/index';
 import { userCollection } from '@mocks/userCollection';
 
+import { connection } from '@repositories/connection';
 import { app } from '../../../app';
 import { deleteUserModule } from '.';
 import { DeleteUserError } from './DeleteUserError';
@@ -54,6 +55,16 @@ let usersAfter: any[];
 jest.setTimeout(30000);
 
 describe('Testes de Integração de DeleteUser', () => {
+  const dbConnection = connection();
+
+  beforeAll(async () => {
+    await dbConnection.start();
+  });
+
+  afterAll(async () => {
+    await dbConnection.close();
+  });
+
   beforeEach(async () => {
     await supertest(app).post('/v1/user/create').send(createUserData);
 
