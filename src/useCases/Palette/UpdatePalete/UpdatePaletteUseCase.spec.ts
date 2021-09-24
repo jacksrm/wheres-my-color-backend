@@ -30,3 +30,7 @@ describe('Testes de UpdatePalette', () => {
       .toThrow(new UpdatePaletteError(404, "Can't update this palette!"));
   });
 });
+
+describe('Testes de Integração de UpdatePalette', () => {
+
+});
