@@ -7,20 +7,8 @@ export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   handle = async (request: Request, response: Response) => {
-    const {
-      username,
-      email,
-      password,
-      profilePicture,
-    }: ICreateUserRequestDTO = request.body;
-
     try {
-      await this.createUserUseCase.execute({
-        username,
-        email,
-        password,
-        profilePicture,
-      });
+      await this.createUserUseCase.execute(request.body);
 
       return response
         .status(201)

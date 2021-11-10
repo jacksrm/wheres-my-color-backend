@@ -9,13 +9,13 @@ export class PalettesRepository implements IPalettesRepository {
 
   deletePalette = (
     _id: string,
-  ): Promise<{ ok?: number, n?: number } & { deletedCount?: number }> => (
+  ): Promise<{ ok?: boolean }> => (
     new Promise((resolve) => {
       const match = this.getPaletteById(_id);
 
       if (!match) resolve({});
 
-      resolve({ ok: 1 });
+      resolve({ ok: true });
     })
   );
 

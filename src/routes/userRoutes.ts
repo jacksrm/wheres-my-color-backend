@@ -29,4 +29,4 @@ userRoutes.route('/profile')
   .put(authenticate.middleware, updateUser.controller)
   .delete(authenticate.middleware, deleteUser.controller);
 
-export default userRoutes;
+export { userRoutes };

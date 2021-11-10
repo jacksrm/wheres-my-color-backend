@@ -19,7 +19,7 @@ export class UpdateUserUseCase {
     if (email) {
       const matchUserByEmail = await this.usersRepository.findByEmail(email);
 
-      if (matchUserByEmail) throw new Error('Email already registered!');
+      if (matchUserByEmail && matchUserByEmail._id !== matchUserById._id) { throw new Error('Email already registered!'); }
     }
 
     if (username) {

@@ -6,4 +6,4 @@ const login = userLoginModule();
 
 loginRoutes.post('/', login.controller);
 
-export default loginRoutes;
+export { loginRoutes };

@@ -2,7 +2,13 @@ import 'dotenv/config';
 import supertest from 'supertest';
 import { User } from '@entities/User';
 import { mockRepos } from '@mocks/index';
-import { conflictEmailUserData, conflictUsernameUserData, updateUserData, userCollection } from '@mocks/userCollection';
+import {
+  conflictEmailUserData,
+  conflictUsernameUserData,
+  updateUserData,
+  userCollection,
+} from '@mocks/userCollection';
+import { connection } from '@repositories/connection';
 import { app } from '../../../app';
 import { updateUserModule } from '.';
 
@@ -25,27 +31,27 @@ describe('Testes unitários de UpdateUser', () => {
   });
 
   test(`Deve lançar uma exceção ao não passar um ID de usuário correto com a mensagem "${INVALID_ID_ERROR.message}""`, async () => {
-    await expect(updateUser.useCase({ _id: 'id inválido!' }))
-      .rejects
-      .toThrow(INVALID_ID_ERROR);
+    await expect(updateUser.useCase({ _id: 'id inválido!' })).rejects.toThrow(
+      INVALID_ID_ERROR,
+    );
   });
 
   test(`Deve lançar uma exceção ao tentar mudar para um email já existente com a mensagem "${EMAIL_ALREADY_EXISTS_ERROR.message}""`, async () => {
-    await expect(updateUser.useCase({
-      _id: users[1]._id,
-      email: conflictEmailUserData.email,
-    }))
-      .rejects
-      .toThrow(EMAIL_ALREADY_EXISTS_ERROR);
+    await expect(
+      updateUser.useCase({
+        _id: users[1]._id,
+        email: conflictEmailUserData.email,
+      }),
+    ).rejects.toThrow(EMAIL_ALREADY_EXISTS_ERROR);
   });
 
   test(`Deve lançar uma exceção ao tentar mudar para um username já existente com a mensagem "${USERNAME_ALREADY_EXISTS_ERROR.message}""`, async () => {
-    await expect(updateUser.useCase({
-      _id: users[1]._id,
-      username: conflictUsernameUserData.username,
-    }))
-      .rejects
-      .toThrow(USERNAME_ALREADY_EXISTS_ERROR);
+    await expect(
+      updateUser.useCase({
+        _id: users[1]._id,
+        username: conflictUsernameUserData.username,
+      }),
+    ).rejects.toThrow(USERNAME_ALREADY_EXISTS_ERROR);
   });
 });
 
@@ -71,6 +77,16 @@ jest.setTimeout(30000);
 let token: string;
 
 describe('Testes de Integração de UpdateUser', () => {
+  const dbConnection = connection();
+
+  beforeAll(async () => {
+    await dbConnection.start();
+  });
+
+  afterAll(async () => {
+    await dbConnection.close();
+  });
+
   beforeEach(async () => {
     await supertest(app).post('/v1/user/create').send(createUserData);
 
@@ -97,7 +113,9 @@ describe('Testes de Integração de UpdateUser', () => {
       .auth(token, { type: 'bearer' })
       .send(updateUserData2);
 
-    const { body: { user } } = await supertest(app)
+    const {
+      body: { user },
+    } = await supertest(app)
       .get('/v1/user/profile')
       .auth(token, { type: 'bearer' });
 

@@ -5,6 +5,8 @@ interface UserProps {
   email: string;
   password: string;
   profilePicture?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export class User {
@@ -16,12 +18,18 @@ export class User {
 
   public password: string;
 
+  public createdAt?: string;
+
+  public updatedAt?: string;
+
   public profilePicture?: string;
 
   constructor(props: UserProps, id: string = v4()) {
-    this.username = props.username;
     this.email = props.email;
+    this.username = props.username;
     this.password = props.password;
+    this.createdAt = props.createdAt;
+    this.updatedAt = props.updatedAt;
     this.profilePicture = props.profilePicture;
     this._id = id;
   }

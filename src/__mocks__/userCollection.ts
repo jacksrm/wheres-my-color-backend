@@ -30,12 +30,12 @@ export const updateUserData = {
 
 export const conflictEmailUserData = {
   username: 'JackSR',
-  email: 'jacson@meuapp.com',
+  email: 'edinaldopereira@meuapp.com',
   password: '1234567890',
 };
 
 export const conflictUsernameUserData = {
-  username: 'JackRodrigues',
+  username: 'EdinaldoPereira',
   email: 'jacsonrodrigues@meuapp.com',
   password: '1234567890',
 };
