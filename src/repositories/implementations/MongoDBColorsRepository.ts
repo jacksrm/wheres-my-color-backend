@@ -18,4 +18,28 @@ export class MongoDBColorsRepository implements IColorsRepository {
 
     await palette.save();
   }
+
+  updateColor = async (color: Color, paletteId: string) => {
+    const palette = await this.PaletteModel.findById(paletteId);
+
+    if (!palette) throw new Error('Palette not found!');
+
+    palette.colors = palette.colors?.map<Color>((col) => {
+      if (col._id === color._id) {
+        return color;
+      }
+
+      return col;
+    });
+
+    palette.save();
+  };
+
+  findColorById = async (paletteId: string, colorId: string) => {
+    const palette = await this.PaletteModel.findById(paletteId);
+
+    const color = palette?.colors?.find((col) => col._id === colorId);
+
+    return color ?? null;
+  }
 }
