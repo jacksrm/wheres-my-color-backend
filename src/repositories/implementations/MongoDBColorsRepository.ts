@@ -1,6 +1,7 @@
 import { Color } from '@entities/Color';
 import { Palette } from '@entities/Palette';
 import { IColorsRepository } from '@repositories/IColorsRepository';
+import { DeleteColorError } from '@useCases/Color/DeleteColor/DeleteColorError';
 import { Model } from 'mongoose';
 
 export class MongoDBColorsRepository implements IColorsRepository {
@@ -41,5 +42,16 @@ export class MongoDBColorsRepository implements IColorsRepository {
     const color = palette?.colors?.find((col) => col._id === colorId);
 
     return color ?? null;
+  }
+
+  delete = async (colorId: string, paletteId: string) => {
+    const palette = await this.PaletteModel.findById(paletteId);
+
+    if (!palette) {
+      throw new DeleteColorError(404, 'Palette Not Found!');
+    }
+
+    palette.colors = palette.colors?.filter((color) => color._id !== colorId);
+    palette.save();
   }
 }

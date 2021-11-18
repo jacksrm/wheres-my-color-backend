@@ -1,6 +1,7 @@
 import { repositoriesModule } from '@repositories/index';
 import { authenticateUserModule } from '@useCases/Authentication/AuthenticateUser';
 import { createColorModule } from '@useCases/Color/CreateColor';
+import { deleteColorModule } from '@useCases/Color/DeleteColor';
 import { updateColorModule } from '@useCases/Color/UpdateColor';
 import { Request, Response, Router } from 'express';
 
@@ -9,6 +10,7 @@ const colorRoutes = Router();
 const authenticate = authenticateUserModule();
 const create = createColorModule();
 const update = updateColorModule();
+const deleteColor = deleteColorModule();
 
 colorRoutes.post(
   '/create/:paletteId',
@@ -20,6 +22,12 @@ colorRoutes.put(
   '/update/:paletteId',
   authenticate.middleware,
   update.controller,
+);
+
+colorRoutes.delete(
+  '/delete/:paletteId/:colorId',
+  authenticate.middleware,
+  deleteColor.controller,
 );
 
 const repos = repositoriesModule();
