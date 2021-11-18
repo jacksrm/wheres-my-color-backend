@@ -1,0 +1,291 @@
+_id: spc_e18f9f7d0c4a4553986e12eb1bb320a9
+type: ApiSpec
+parentId: wrk_21c418891dbe4b6d996adf02be28ca15
+modified: 1637208115205
+created: 1630122438060
+fileName: Wheres My Color?
+contents: "openapi: 3.0.3
+
+  info:\ 
+
+  \  title: Wheres My Color API
+
+  \  description: API da aplicação Wheres My Color
+
+  \  contact:
+
+  \    name: Jacson Rodrigues
+
+  \    url: https://www.linkedin.com/in/jacson-rodrigues/
+
+  \    email: jacson.s.r1@gmail.com
+
+  \  version: 0.1.0
+
+  servers:\ 
+
+  \  - url: http://localhost:3333/v1
+
+  \    description: Endereço de desenvolvimento
+
+  \  - url: https://wheresmycolorapi.herokuapp.com/v1
+
+  \    description: Servidor de produção da API
+
+  paths:\ 
+
+  \  /:
+
+  \    get:
+
+  \      summary: Retorna todos os usuários com suas paletas públicas
+
+  \      description: Esta rota é uma rota de pesquisa onde ao acessar sem
+  nenhum argumento, todos os usuários são retornados junto com as paletas
+  públicas de cada usuário
+
+  \      tags:
+
+  \        - Search
+
+  \      responses:
+
+  \        '200':
+
+  \          description: Sucesso!
+
+  \          content:
+
+  \            application/json:
+
+  \              schema:
+
+  \                $ref: '#/components/schemas/PublicUserWithPalettes'
+
+  \              examples:
+
+  \                PublicUserWithPalettes:
+
+  \                  $ref: '#/components/examples/PublicUserWithPalettes'
+
+  \  /login:
+
+  \    post:
+
+  \      summary: Faz a autenticação do usuário
+
+  \      description: Esta rota serve para fazer a autenticação do usuário
+  através de email e senha, e retorna um token de autenticação
+
+  \      tags:
+
+  \        - Login
+
+  \      responses:
+
+  \        '200':
+
+  \          description: Sucesso!
+
+  \          content:
+
+  \            application/json:
+
+  \              schema:
+
+  \                $ref: '#/components/schemas/LoginResponse'
+
+  \              examples:
+
+  \                LoginToken:
+
+  \                  $ref: '#/components/examples/LoginResponse'
+
+  components:
+
+  \  schemas:
+
+  \    PublicUserWithPalettes:
+
+  \      type: object
+
+  \      properties:
+
+  \        _id:\ 
+
+  \          type: string
+
+  \        username:\ 
+
+  \          type: string
+
+  \        profilePicture:
+
+  \          type: string
+
+  \        palettes:
+
+  \          type: array
+
+  \          items:
+
+  \            $ref: '#/components/schemas/Palette'
+
+  \    PublicUser:
+
+  \      type: object
+
+  \      properties:
+
+  \        _id:\ 
+
+  \          type: string
+
+  \        username:\ 
+
+  \          type: string
+
+  \        profilePicture:
+
+  \          type: string
+
+  \    User:
+
+  \      type: object
+
+  \      properties:
+
+  \        _id:\ 
+
+  \          type: string
+
+  \        username:\ 
+
+  \          type: string
+
+  \        email:
+
+  \          type: string
+
+  \        profilePicture:
+
+  \          type: string
+
+  \    Palette:
+
+  \      type: object
+
+  \      properties:
+
+  \        _id:
+
+  \          type: string
+
+  \        ownerId:
+
+  \          type: string
+
+  \        name:
+
+  \          type: string
+
+  \        isPublic:\ 
+
+  \          type: boolean
+
+  \        membersId:
+
+  \          type: array
+
+  \          items:
+
+  \            type: string
+
+  \        authorizeChange:
+
+  \          type: array
+
+  \          items:
+
+  \            type: string
+
+  \    LoginResponse:
+
+  \      type: object
+
+  \      properties:
+
+  \        token:
+
+  \          type: string
+
+  \  examples:
+
+  \    PublicUserWithPalettes:
+
+  \      summary: Exemplo de Usuário com suas paletas.
+
+  \      value:
+
+  \        _id: 946f08cc-4938-42a7-866b-fc3173a9bf44
+
+  \        profilePicture: ''
+
+  \        username: EdinaldoPereira
+
+  \        paletes:
+
+  \          - $ref: '#/components/examples/Palette/value'
+
+  \    Palette:
+
+  \      summary: Exemplo de Paleta
+
+  \      value:
+
+  \        _id: f8b18a54-1236-4517-9ed6-547f59dc511b
+
+  \        name: Você vale nada!
+
+  \        ownerId: 946f08cc-4938-42a7-866b-fc3173a9bf44
+
+  \        colors: []
+
+  \        isPublic: true
+
+  \        membersId:\ 
+
+  \          - 946f08cc-4938-42a7-866b-fc3173a9bf44
+
+  \        authorizeChange:
+
+  \          - 946f08cc-4938-42a7-866b-fc3173a9bf44
+
+  \    LoginResponse:
+
+  \      summary: Exemplo de resposta bem sucedida de login.
+
+  \      value:
+
+  \        token:
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlMGY4YTgxNy0xYzRjLTRmYjAt\
+  YTQ2NC0zMGI1NzFlMDVlZjEiLCJlbWFpbCI6ImVkaW5hbGRvcGVyZWlyYUBtZXVhcHAuY29tIiwia\
+  WF0IjoxNjM3MjAwODA3LCJleHAiOjE2MzcyODcyMDd9.hOHMAAJK850nsQEYW_Ad4Qgm8Bm7aV2JP\
+  qjqWambr7A
+
+  \       \ 
+
+  \     \ 
+
+  \       \ 
+
+  \       \ 
+
+  \       \ 
+
+  \       \ 
+
+  \           \ 
+
+  \          "
+contentType: yaml
