@@ -10,8 +10,6 @@ export class CreateUserUseCase {
 
   execute = async (data: ICreateUserRequestDTO) => {
     if (Object.keys(data).length < 3) {
-      console.log('chegou aqui');
-
       throw new Error(
         'Insufficient data provided, please review your request data and try again!',
       );
