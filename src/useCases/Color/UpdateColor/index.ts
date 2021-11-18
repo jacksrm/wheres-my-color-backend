@@ -1,16 +1,16 @@
 import { repositoriesModule } from '@repositories/index';
 import { IRepositoryFactory } from '@repositories/IRepositoryFactory';
-import { CreateColorController } from './CreateColorController';
-import { CreateColorUseCase } from './CreateColorUseCase';
+import { UpdateColorController } from './UpdateColorController';
+import { UpdateColorUseCase } from './UpdateColorUseCase';
 
 const repos = repositoriesModule();
 
-export function createColorModule(repository: IRepositoryFactory = repos) {
-  const useCase = new CreateColorUseCase(
+export function updateColorModule(repository: IRepositoryFactory = repos) {
+  const useCase = new UpdateColorUseCase(
     repository.colors,
     repository.palettes,
   );
-  const controller = new CreateColorController(useCase);
+  const controller = new UpdateColorController(useCase);
 
   return {
     useCase: useCase.execute,

@@ -1,6 +1,7 @@
 import { Color } from '@entities/Color';
 import { Palette } from '@entities/Palette';
 import { IColorsRepository } from '@repositories/IColorsRepository';
+import { DeleteColorError } from '@useCases/Color/DeleteColor/DeleteColorError';
 import { Model } from 'mongoose';
 
 export class MongoDBColorsRepository implements IColorsRepository {
@@ -17,5 +18,40 @@ export class MongoDBColorsRepository implements IColorsRepository {
     palette.colors?.push(new this.ColorModel(color));
 
     await palette.save();
+  }
+
+  updateColor = async (color: Color, paletteId: string) => {
+    const palette = await this.PaletteModel.findById(paletteId);
+
+    if (!palette) throw new Error('Palette not found!');
+
+    palette.colors = palette.colors?.map<Color>((col) => {
+      if (col._id === color._id) {
+        return color;
+      }
+
+      return col;
+    });
+
+    palette.save();
+  };
+
+  findColorById = async (paletteId: string, colorId: string) => {
+    const palette = await this.PaletteModel.findById(paletteId);
+
+    const color = palette?.colors?.find((col) => col._id === colorId);
+
+    return color ?? null;
+  }
+
+  delete = async (colorId: string, paletteId: string) => {
+    const palette = await this.PaletteModel.findById(paletteId);
+
+    if (!palette) {
+      throw new DeleteColorError(404, 'Palette Not Found!');
+    }
+
+    palette.colors = palette.colors?.filter((color) => color._id !== colorId);
+    palette.save();
   }
 }

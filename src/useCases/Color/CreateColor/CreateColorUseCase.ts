@@ -1,14 +1,20 @@
 import { Color } from '@entities/Color';
 import { IColorsRepository } from '@repositories/IColorsRepository';
+import { IPalettesRepository } from '@repositories/IPalettesRepository';
 import { ICreateColorRequestDTO } from './CreateColorDTO';
 
 export class CreateColorUseCase {
-  constructor(private colorRepo: IColorsRepository) {}
+  constructor(
+    private colorRepo: IColorsRepository,
+    private paletteRepo: IPalettesRepository,
+  ) {}
 
-  execute = async ({ paletteId, values, title }: ICreateColorRequestDTO) => {
-    if (!paletteId) throw new Error('PaletteId not informed!');
+  execute = async ({ paletteId, values, title, userId }: ICreateColorRequestDTO) => {
+    const palette = await this.paletteRepo.getPaletteById(paletteId);
 
-    if (!values) throw new Error('Value not informed!');
+    if (!palette?.authorizeChange.some((id) => id === userId)) {
+      throw new Error('Unauthorized!');
+    }
 
     const color = new Color({ values, title });
 
