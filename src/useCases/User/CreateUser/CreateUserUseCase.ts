@@ -28,9 +28,7 @@ export class CreateUserUseCase {
 
     const user = new User(data);
 
-    await encodePassword(user);
-
-    const createdUser = await this.usersRepository.save(user);
+    const createdUser = await this.usersRepository.save(await encodePassword(user));
     return createdUser;
   };
 }

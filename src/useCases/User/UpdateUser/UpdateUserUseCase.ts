@@ -1,5 +1,6 @@
 import { User } from '@entities/User';
 import { IUsersRepository } from '@repositories/IUsersRepository';
+import { encodeUserPasswordModule } from '@useCases/Authentication/EncodePassword';
 import { IUpdateUserRequestDTO } from './UpdateUserDTO';
 
 export class UpdateUserUseCase {
@@ -12,7 +13,8 @@ export class UpdateUserUseCase {
     profilePicture,
     username,
   }: IUpdateUserRequestDTO) => {
-    const matchUserById = await this.usersRepository.findById(_id);
+    const encode = encodeUserPasswordModule();
+    const matchUserById = await this.usersRepository.findById(_id, true);
 
     if (!matchUserById) throw new Error("There's a problema with your request!");
 
@@ -40,7 +42,9 @@ export class UpdateUserUseCase {
       _id,
     );
 
-    const result = await this.usersRepository.update(user);
+    const result = await this.usersRepository.update(
+      user.password.slice(0, 3) === '$2b' ? user : await encode(user),
+    );
 
     if (!result) {
       throw new Error(
